@@ -5,13 +5,17 @@ void main() {
   runApp(const AfghanLance());
 }
 
-class AfghanLance extends StatelessWidget {
+class AfghanLance extends StatefulWidget {
   const AfghanLance({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<AfghanLance> createState() => _AfghanLanceState();
+}
+
+class _AfghanLanceState extends State<AfghanLance> {
   @override
   Widget build(BuildContext context) {
-    return Home();
+    return MaterialApp(home: Home());
   }
 }
 
