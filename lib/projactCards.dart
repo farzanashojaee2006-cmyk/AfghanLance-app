@@ -1,4 +1,5 @@
-import 'package:afghanlance/AppColor.dart';
+
+import 'package:afghanlance/Conestant.dart';
 import 'package:flutter/material.dart';
 
 

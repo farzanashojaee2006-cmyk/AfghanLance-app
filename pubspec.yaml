@@ -51,7 +51,7 @@ dev_dependencies:
 flutter_launcher_icons:
    android: true
    ios: true
-   image_path: "assets/images/Aroma.jpg"
+   image_path: "assets/images/ChatGPT Image May 4, 2026, 08_53_50 PM (1).png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
