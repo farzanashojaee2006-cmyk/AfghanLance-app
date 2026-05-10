@@ -47,7 +47,7 @@ class ProjectCard extends StatelessWidget {
           SizedBox(height: 6),
           Text(
             company,
-            style: TextStyle(color: textLightColor, fontSize: 13),
+            style: textLightColor,
           ),
           SizedBox(height: 12),
           Wrap(
@@ -57,13 +57,13 @@ class ProjectCard extends StatelessWidget {
                 .map((tag) => Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: primaryColor.withOpacity(0.1),
+                color: kSecondColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
                 tag,
                 style: TextStyle(
-                  color: primaryColor,
+                  color: kSecondColor,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -78,7 +78,7 @@ class ProjectCard extends StatelessWidget {
               Text(
                 budget,
                 style: TextStyle(
-                  color:primaryColor,
+                  color:kSecondColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                 ),
@@ -91,7 +91,7 @@ class ProjectCard extends StatelessWidget {
             ],
           ),
           Text(proposals, style:TextStyle(
-            color:primaryColor,
+            color:kSecondColor,
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),)

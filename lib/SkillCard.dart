@@ -27,7 +27,7 @@ class SkillCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 32, color: primaryColor),
+          Icon(icon, size: 32, color: kSecondColor),
           SizedBox(height: 8),
           Text(
             label,
