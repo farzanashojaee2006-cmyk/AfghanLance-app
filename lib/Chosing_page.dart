@@ -2,17 +2,17 @@ import 'package:afghanlance/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/sing_up_page.dart';
 
-import 'login_page.dart';
 
-class WelcomePage extends StatefulWidget {
+
+class WelcomePageTwo extends StatefulWidget {
   final VoidCallback onToggleTheme;
-  const WelcomePage({super.key, required this.onToggleTheme});
+  const WelcomePageTwo({super.key, required this.onToggleTheme});
 
   @override
-  State<WelcomePage> createState() => _WelcomePageState();
+  State<WelcomePageTwo> createState() => _WelcomePageState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _WelcomePageState extends State<WelcomePageTwo> {
   bool isClient = true;
 
   @override
