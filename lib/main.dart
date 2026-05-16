@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Chosing_page.dart';
-import 'Conestant.dart';
+import 'constants.dart';
 
 void main() {
   runApp(const AfghanLance());
@@ -31,7 +31,7 @@ class _AfghanLanceState extends State<AfghanLance> {
 
       theme: ThemeData(
         brightness: Brightness.light,
-        scaffoldBackgroundColor: KFirtsColor,
+        scaffoldBackgroundColor: kFirstColor,
         primaryColor: kThirdColor,
         colorScheme: const ColorScheme.light(primary: kThirdColor),
       ),

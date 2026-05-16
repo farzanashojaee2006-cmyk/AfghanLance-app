@@ -1,6 +1,6 @@
 import 'package:afghanlance/Home.dart';
 import 'package:flutter/material.dart';
-import 'package:afghanlance/sing_up_page.dart';
+import 'package:afghanlance/signup_page.dart';
 
 import 'login_page.dart';
 
