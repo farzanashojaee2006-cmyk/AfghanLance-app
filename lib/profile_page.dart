@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:afghanlance/Conestant.dart';
+import 'package:afghanlance/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -17,7 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     Color primaryColor = kThirdColor;
-    Color backgroundColor = isDark ? const Color(0xFF121212) : KFirtsColor;
+    Color backgroundColor = isDark ? const Color(0xFF121212) : kFirstColor;
     Color cardColor = isDark ? const Color(0xFF1E1E1E) : Colors.white;
     Color textColor = isDark ? Colors.white : Colors.black;
     Color subTextColor = isDark ? Colors.white70 : Colors.black54;
@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 12),
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.black26 : KFirtsColor.withOpacity(0.5),
+                        color: isDark ? Colors.black26 : kFirstColor.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Row(
@@ -145,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       spacing: 8,
                       children: ["Flutter", "Figma", "UI Design"].map((skill) => Chip(
                         label: Text(skill, style: TextStyle(color: textColor)),
-                        backgroundColor: isDark ? Colors.white10 : KFirtsColor,
+                        backgroundColor: isDark ? Colors.white10 : kFirstColor,
                       )).toList(),
                     )
                   ],
