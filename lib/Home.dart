@@ -1,4 +1,5 @@
 import 'package:afghanlance/SkillCard.dart';
+import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile_page.dart';
 import 'package:afghanlance/projactCards.dart';
 import 'package:flutter/material.dart';
@@ -174,7 +175,9 @@ class _HomeScreenState extends State<HomePage> {
                 padding: const EdgeInsets.all(12),
               ),
 
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatePostScreen()));
+              },
 
               child: const Icon(Icons.add, color: Colors.white),
             ),
