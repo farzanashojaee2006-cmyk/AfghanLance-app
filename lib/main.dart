@@ -1,3 +1,4 @@
+import 'package:afghanlance/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 import 'Chosing_page.dart';
@@ -47,7 +48,16 @@ class _AfghanLanceState extends State<AfghanLance> {
         ),
       ),
 
-      home: WelcomePage(onToggleTheme: toggleTheme),
+      initialRoute: '/',
+
+
+      routes: {
+        '/': (context) => WelcomePageOne(onToggleTheme: toggleTheme),
+        '/welcome': (context) => WelcomePageTwo(onToggleTheme: toggleTheme),
+
+      },
+
     );
+
   }
 }
