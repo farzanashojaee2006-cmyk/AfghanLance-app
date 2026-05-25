@@ -1,6 +1,7 @@
+import 'package:afghanlance/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'Chosing_page.dart';
-import 'Conestant.dart';
+import 'constants.dart';
 
 
 void main() {
@@ -31,7 +32,7 @@ class _AfghanLanceState extends State<AfghanLance> {
 
       theme: ThemeData(
         brightness: Brightness.light,
-        scaffoldBackgroundColor: KFirtsColor,
+        scaffoldBackgroundColor: kFirstColor,
         primaryColor: kThirdColor,
         colorScheme: const ColorScheme.light(primary: kThirdColor),
       ),
@@ -47,8 +48,17 @@ class _AfghanLanceState extends State<AfghanLance> {
         ),
       ),
 
-      home: WelcomePage(onToggleTheme: toggleTheme),
+      initialRoute: '/',
+
+
+      routes: {
+        '/': (context) => WelcomePageOne(onToggleTheme: toggleTheme),
+        '/welcome': (context) => WelcomePageTwo(onToggleTheme: toggleTheme),
+
+      },
+
     );
+
   }
 }
 

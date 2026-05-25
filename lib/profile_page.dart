@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
-    );
-  }
-}
+import 'package:afghanlance/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -133,6 +118,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
 
+
+Color primaryColor = kThirdColor;
+Color backgroundColor = isDark ? const Color(0xFF121212) : kFirstColor;
+Color cardColor = isDark ? const Color(0xFF1E1E1E) : Colors.white;
+Color textColor = isDark ? Colors.white : Colors.black;
+Color subTextColor = isDark ? Colors.white70 : Colors.black54;
 
 
       body: SafeArea(
@@ -261,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 12),
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: bg,
+                        color: isDark ? Colors.black26 : kFirstColor.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Row(
@@ -318,12 +309,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }),
                       ),
                     ),
+const SizedBox(height: 15),
+buildTabContent(),
+const SizedBox(height: 10),
+Wrap(
+  spacing: 8,
+  children: ["Flutter", "Figma", "UI Design"].map((skill) => Chip(
+    label: Text(skill, style: TextStyle(color: textColor)),
+    backgroundColor: isDark ? Colors.white10 : kFirstColor,
+  )).toList(),
+)
 
-                    const SizedBox(height: 15),
-
-
-
-                    buildTabContent(),
                   ],
                 ),
               ),
