@@ -4,8 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
-import '../Conestant.dart';
+import '../constants.dart';
 import 'Account_page.dart';
 import 'Appearance_page.dart';
 import 'JobPrefirences_page.dart';
@@ -23,7 +22,7 @@ class SettingsPage extends StatelessWidget{
   @override
   Widget build (BuildContext context){
     return Scaffold(
-      backgroundColor:KFirtsColor,
+      backgroundColor:kFirstColor,
       appBar: AppBar(
         backgroundColor: Color(0XFF006D5F),
 
@@ -40,7 +39,7 @@ class SettingsPage extends StatelessWidget{
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(16, 25, 16, 25),
             decoration: const BoxDecoration(
-              color:KFirtsColor,
+              color:kFirstColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -143,7 +142,7 @@ class SettingsPage extends StatelessWidget{
             child: Container(
               margin: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: KFirtsColor,
+                color: kFirstColor,
                 borderRadius: BorderRadius.circular(28),
               ),
               child: ListView(

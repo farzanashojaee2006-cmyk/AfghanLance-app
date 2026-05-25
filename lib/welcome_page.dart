@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui';
+import 'constants.dart';
 
-import 'Conestant.dart';
 
 class WelcomePageOne extends StatefulWidget {
   final VoidCallback onToggleTheme;
@@ -86,7 +86,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
             Positioned(
               bottom: 100,
               right: -30,
-              child: _buildBackgroundCircle(KFirtsColor.withOpacity(0.1), 150),
+              child: _buildBackgroundCircle(kFirstColor.withOpacity(0.1), 150),
             ),
             Center(
               child: AnimatedBuilder(
@@ -122,7 +122,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                               children: [
                                 ShaderMask(
                                   shaderCallback: (bounds) => const LinearGradient(
-                                    colors: [Colors.white, kSecondColor, KFirtsColor],
+                                    colors: [Colors.white, kSecondColor, kFirstColor],
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
                                   ).createShader(bounds),

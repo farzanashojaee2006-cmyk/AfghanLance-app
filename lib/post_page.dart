@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'Conestant.dart';
+import 'constants.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -205,7 +205,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
     return Scaffold(
 
-      backgroundColor: KFirtsColor,
+      backgroundColor: kFirstColor,
 
       appBar: AppBar(
 
@@ -229,7 +229,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
           style: ElevatedButton.styleFrom(
 
-            backgroundColor:KFirtsColor,
+            backgroundColor:kFirstColor,
 
             shape: RoundedRectangleBorder(
               borderRadius:
