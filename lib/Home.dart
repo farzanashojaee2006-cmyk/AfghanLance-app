@@ -1,4 +1,5 @@
 import 'package:afghanlance/SkillCard.dart';
+import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
@@ -107,10 +108,15 @@ class _HomeScreenState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.help_outline, color: kThirdColor),
 
-              title: Text(
-                "Help & Support",
+              title: GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpPage()));
+                },
+                child: Text(
+                  "Help & Support",
 
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                ),
               ),
 
               onTap: () {},
