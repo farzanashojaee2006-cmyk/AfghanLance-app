@@ -1,3 +1,4 @@
+import 'package:afghanlance/Setting_page/Setting_Screen.dart';
 import 'package:afghanlance/SkillCard.dart';
 import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
@@ -83,27 +84,19 @@ class _HomeScreenState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.settings_outlined, color: kThirdColor),
 
-              title: Text(
-                "Settings",
+              title: GestureDetector(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsPage()));},
+                child: Text(
+                  "Settings",
 
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                ),
               ),
 
               onTap: () {},
             ),
 
 
-            ListTile(
-              leading: Icon(Icons.chat_outlined, color: kThirdColor),
 
-              title: Text(
-                "Chat with Uma",
-
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-
-              onTap: () {},
-            ),
 
             ListTile(
               leading: Icon(Icons.help_outline, color: kThirdColor),
