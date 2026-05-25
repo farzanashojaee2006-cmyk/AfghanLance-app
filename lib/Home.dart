@@ -1,9 +1,11 @@
 import 'package:afghanlance/Setting_page/Setting_Screen.dart';
 import 'package:afghanlance/SkillCard.dart';
+import 'package:afghanlance/helpePage.dart';
+import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile_page.dart';
-import 'package:afghanlance/projactCards.dart';
+import 'package:afghanlance/projectCards.dart';
 import 'package:flutter/material.dart';
-import 'package:afghanlance/Conestant.dart';
+import 'package:afghanlance/constants.dart';
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -99,10 +101,15 @@ class _HomeScreenState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.help_outline, color: kThirdColor),
 
-              title: Text(
-                "Help & Support",
+              title: GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpPage()));
+                },
+                child: Text(
+                  "Help & Support",
 
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                ),
               ),
 
               onTap: () {},
@@ -124,12 +131,12 @@ class _HomeScreenState extends State<HomePage> {
         ),
       ),
 
-      backgroundColor: isDark ? const Color(0xFF121212) : KFirtsColor,
+      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
 
       appBar: AppBar(
         elevation: 0,
 
-        backgroundColor: isDark ? const Color(0xFF121212) : KFirtsColor,
+        backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
 
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
 
@@ -167,7 +174,9 @@ class _HomeScreenState extends State<HomePage> {
                 padding: const EdgeInsets.all(12),
               ),
 
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatePostScreen()));
+              },
 
               child: const Icon(Icons.add, color: Colors.white),
             ),
