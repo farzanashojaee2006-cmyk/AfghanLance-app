@@ -264,43 +264,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //  Country
                   GestureDetector(
                     onTap: openCountryPicker,
-                    child: Container(
-                      padding:  EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 17,
-                      ),
-                      decoration: BoxDecoration(
-                        color: kLightColor,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12.withOpacity(0.05),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: isDark ? Colors.grey[900] : kLightColor,
+                        prefixIcon: Icon(Icons.public, color: kThirdColor),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 18,
+                          horizontal: 10,
+                        ),
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.public, color: kThirdColor),
-
-                          SizedBox(width: 12),
-
                           Expanded(
                             child: Text(
                               selectedCountry,
                               style: TextStyle(
                                 color: selectedCountry == "Select Country"
-                                    ? Color(0xFF666666)
-                                    : Colors.black87,
-                                fontSize: 15,
+                                    ? (isDark ? Colors.white54 : Colors.grey[600])
+                                    : (isDark ? Colors.white : Colors.black),
                               ),
                             ),
                           ),
-
                           Icon(
                             Icons.keyboard_arrow_down_rounded,
-                            color: kFirstColor,
+                            color: isDark ? Colors.white70 : Colors.grey,
                           ),
                         ],
                       ),
