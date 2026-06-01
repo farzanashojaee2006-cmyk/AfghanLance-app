@@ -1,8 +1,8 @@
 import 'package:afghanlance/welcome_page.dart';
 import 'package:flutter/material.dart';
-
 import 'Chosing_page.dart';
 import 'constants.dart';
+
 
 void main() {
   runApp(const AfghanLance());
@@ -61,3 +61,9 @@ class _AfghanLanceState extends State<AfghanLance> {
 
   }
 }
+
+
+
+
+
+

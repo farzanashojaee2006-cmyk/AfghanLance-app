@@ -2,6 +2,7 @@ import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/Home.dart';
 import 'package:afghanlance/login_page.dart';
 import 'package:country_picker/country_picker.dart';
+
 import 'package:flutter/material.dart';
 
 enum SignupMethod { email, phone }
@@ -33,7 +34,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
-  // COUNTRY PICKER
   void openCountryPicker() {
     showCountryPicker(
       context: context,
@@ -45,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );
   }
-// Reusable TextField
+
 
   Widget buildTextField({
     required String hint,

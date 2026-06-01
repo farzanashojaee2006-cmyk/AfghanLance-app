@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui';
-
 import 'constants.dart';
 
 class WelcomePageOne extends StatefulWidget {
