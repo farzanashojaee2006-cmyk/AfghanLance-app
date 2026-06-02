@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "531463712974",
+    "project_id": "afghanlance-app",
+    "storage_bucket": "afghanlance-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531463712974:android:a641a03fd564299b90609f",
+        "android_client_info": {
+          "package_name": "com.example.afghanlance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531463712974-1j13qf28ep0dfnmggjl7hapu89fp27ad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.afghanlance",
+            "certificate_hash": "e5ea4882adb50997db84fe6fd165508b1e92d46a"
+          }
+        },
+        {
+          "client_id": "531463712974-5p60s70cjtl0r891vv3057ut6ueg53l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq3Q-z9JBiPFNLng4br6iBzBIzF3IlCy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531463712974-5p60s70cjtl0r891vv3057ut6ueg53l1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "531463712974-ns92pahact2i4n1vs57njos2s1f2hbi8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.afghanlance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
