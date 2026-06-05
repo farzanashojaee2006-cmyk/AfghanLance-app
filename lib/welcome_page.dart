@@ -128,7 +128,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                                   child: const Text(
                                     'AfghanLance',
                                     style: TextStyle(
-                                      fontSize: 48,
+                                      fontSize: 45,
                                       fontWeight: FontWeight.w900,
                                       color: Colors.white,
                                       letterSpacing: 3,

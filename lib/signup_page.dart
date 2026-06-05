@@ -1,14 +1,20 @@
 import 'package:afghanlance/constants.dart';
-import 'package:afghanlance/Home.dart';
 import 'package:afghanlance/login_page.dart';
 import 'package:country_picker/country_picker.dart';
-
 import 'package:flutter/material.dart';
+
+import 'onboarding/client/client_onboarding_page.dart';
+import 'onboarding/freelancer/freelancer_onboarding_page.dart';
 
 enum SignupMethod { email, phone }
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  final bool isClient;
+
+  const SignUpScreen({
+    super.key,
+    required this.isClient,
+  });
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -16,16 +22,17 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   SignupMethod signupMethod = SignupMethod.email;
-  final phoneController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final usernameController = TextEditingController();
   final countryController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final usernameController = TextEditingController();
 
   String selectedCountry = "Select Country";
 
@@ -34,6 +41,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
+  @override
+  void initState() {
+    super.initState();
+
+    passwordController.addListener(() {
+      setState(() {});
+    });
+  }
+
   void openCountryPicker() {
     showCountryPicker(
       context: context,
@@ -41,11 +57,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       onSelect: (Country country) {
         setState(() {
           selectedCountry = country.name;
+          countryController.text = country.name;
         });
       },
     );
   }
-
 
   Widget buildTextField({
     required String hint,
@@ -62,92 +78,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
+      autovalidateMode: AutovalidateMode.disabled,
       style: TextStyle(color: isDark ? Colors.white : Colors.black),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: isDark ? Colors.grey[900] : kLightColor,
-        hintText: hint,
-        hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.grey[600]),
-        prefixIcon: Icon(icon, color: kThirdColor),
+      decoration: kAuthInputDecoration(
+        label: hint,
+        icon: icon,
+        isDark: isDark,
         suffixIcon: isPassword
             ? IconButton(
           onPressed: togglePassword,
           icon: Icon(
-            obscureText ? Icons.visibility_off : Icons.visibility,
-            color: Colors.grey,
+            obscureText
+                ? Icons.visibility_off
+                : Icons.visibility,
           ),
         )
             : null,
-        errorStyle: const TextStyle(fontSize: 12, height: 1.5),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide:  BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        contentPadding:EdgeInsets.symmetric(
-          vertical: 18,
-          horizontal: 10,
-        ),
       ),
     );
   }
-  // Social Button
-
-  Widget socialButton(String text, IconData icon) {
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        color: isDark ? Colors.grey[900] : kLightColor,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: isDark ? Colors.white12 : Colors.grey.shade300,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: kThirdColor),
-          SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(color: isDark ? Colors.white : Colors.black),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Build
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isDark ?  Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
+
                   Text(
                     "AFGHANLANCE",
                     style: TextStyle(
@@ -156,7 +121,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: kThirdColor,
                     ),
                   ),
-                  SizedBox(height: 30),
+
+                  const SizedBox(height: 30),
+
                   Text(
                     "Create Account",
                     style: TextStyle(
@@ -165,15 +132,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
-                  SizedBox(height: 8),
+
+                  const SizedBox(height: 8),
+
                   Text(
                     "Welcome! Please fill the form to continue.",
                     style: TextStyle(
                       color: isDark ? Colors.white70 : Colors.grey[700],
                     ),
                   ),
-                  SizedBox(height: 30),
-                  //Name Row
+
+                  const SizedBox(height: 30),
+
                   Row(
                     children: [
                       Expanded(
@@ -205,8 +175,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
-                  // Email
+
+                  const SizedBox(height: 15),
+
                   if (signupMethod == SignupMethod.email)
                     buildTextField(
                       hint: "Email",
@@ -240,9 +211,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                     ),
-                  SizedBox(height: 15),
 
-                  // Public Username
+                  const SizedBox(height: 15),
+
                   buildTextField(
                     hint: "Public Username",
                     icon: Icons.alternate_email,
@@ -260,55 +231,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
 
-                  SizedBox(height: 15),
-                  //  Country
-                  GestureDetector(
+                  const SizedBox(height: 15),
+
+                  TextFormField(
+                    readOnly: true,
+                    controller: countryController,
+                    autovalidateMode: AutovalidateMode.disabled,validator: (value) {
+                      if (selectedCountry == "Select Country") {
+                        return "Select your country";
+                      }
+                      return null;
+                    },
                     onTap: openCountryPicker,
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: isDark ? Colors.grey[900] : kLightColor,
-                        prefixIcon: Icon(Icons.public, color: kThirdColor),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 18,
-                          horizontal: 10,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              selectedCountry,
-                              style: TextStyle(
-                                color: selectedCountry == "Select Country"
-                                    ? (isDark ? Colors.white54 : Colors.grey[600])
-                                    : (isDark ? Colors.white : Colors.black),
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: isDark ? Colors.white70 : Colors.grey,
-                          ),
-                        ],
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    decoration: kAuthInputDecoration(
+                      label: "Country",
+                      icon: Icons.public,
+                      isDark: isDark,
+                      suffixIcon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: isDark
+                            ? Colors.white70
+                            : Colors.grey,
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
 
-                  //Password
+                  const SizedBox(height: 15),
+
                   buildTextField(
                     hint: "Password",
                     icon: Icons.lock_outline,
@@ -345,42 +297,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 8),
 
-                  // PASSWORD STRENGTH
-                  if (passwordController.text.isNotEmpty)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        LinearProgressIndicator(
-                          value: passwordController.text.length >= 10
-                              ? 1
-                              : passwordController.text.length / 10,
-                          backgroundColor: Colors.grey.shade300,
-                          color: passwordController.text.length >= 8
-                              ? Colors.green
-                              : Colors.orange,
-                          minHeight: 6,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-
-                        SizedBox(height: 6),
-
-                        Text(
-                          passwordController.text.length >= 8
-                              ? "Strong Password"
-                              : "Weak Password",
-                          style: TextStyle(
-                            color: passwordController.text.length >= 8
-                                ? Colors.green
-                                : Colors.orange,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    "Password must contain at least 8 characters, one uppercase letter, one number and one special character.",
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1.4,
+                      color: isDark ? Colors.white54 : Colors.black54,
                     ),
+                  ),
 
-                  // CONFIRM PASSWORD
+                  const SizedBox(height: 15),
+
                   buildTextField(
                     hint: "Confirm Password",
                     icon: Icons.lock_outline,
@@ -405,12 +334,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
 
-                  SizedBox(height: 25),
-                  // Sign Up Button
+                  const SizedBox(height: 25),
+
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kThirdColor,
-                      minimumSize:Size(double.infinity, 55),
+                      minimumSize: const Size(double.infinity, 55),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
@@ -423,16 +352,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => HomePage(isClient: false),
+                          builder: (_) => widget.isClient
+                              ? const ClientOnboardingPage()
+                              : const FreelancerOnboardingPage(),
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Sign Up",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 20),
+
+                  const SizedBox(height: 20),
+
                   Row(
                     children: [
                       Expanded(
@@ -441,7 +374,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           "Or",
                           style: TextStyle(
@@ -456,7 +389,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+
+                  const SizedBox(height: 20),
 
                   Center(
                     child: Container(
@@ -469,11 +403,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(Icons.g_mobiledata, color: kThirdColor),
-                          SizedBox(width: 8),
-                          Text(
+                          const SizedBox(width: 8),
+                          const Text(
                             "Continue with Google",
                             style: TextStyle(color: Colors.black),
                           ),
@@ -481,7 +414,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+
+                  const SizedBox(height: 20),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -510,7 +445,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

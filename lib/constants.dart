@@ -9,4 +9,53 @@ const  textDarkColor = TextStyle(color:Color(0xFF1F1F1F),fontWeight: FontWeight.
 const  textLightColor =TextStyle( height:1.4,color:Color(0xFF666666),fontSize: 13) ;
 const kLightColor=Color(0xFFEAE9E9);
 
+InputDecoration kAuthInputDecoration({
+  required String label,
+  required IconData icon,
+  required bool isDark,
+  Widget? suffixIcon,
+}) {
+  return InputDecoration(
+    labelText: label,
+    floatingLabelBehavior: FloatingLabelBehavior.never,
 
+    filled: true,
+    fillColor: isDark ? Colors.grey.shade900 : kLightColor,
+
+    prefixIcon: Icon(icon, color: kThirdColor),
+    suffixIcon: suffixIcon,
+
+    labelStyle: TextStyle(
+      color: isDark ? Colors.white54 : Colors.grey.shade600,
+      fontSize: 14,
+    ),
+
+    errorStyle: const TextStyle(fontSize: 12, height: 1.4),
+
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: BorderSide(color: kThirdColor, width: 1.3),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: Colors.red),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: Colors.red),
+    ),
+
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 12,
+      vertical: 18,
+    ),
+  );
+}

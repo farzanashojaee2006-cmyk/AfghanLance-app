@@ -119,7 +119,8 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => SignUpScreen(),
+                            builder: (_) => SignUpScreen(isClient: isClient,),
+
                           ),
                         );
                       },
