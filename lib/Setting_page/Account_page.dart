@@ -21,7 +21,7 @@ class AccountPage extends StatelessWidget {
               child: Icon(Icons.person, size: 50),
             ),
 
-            const SizedBox(height: 25),
+            SizedBox(height: 25),
 
             ListTile(
               leading: const Icon(Icons.person),
@@ -62,7 +62,7 @@ class AccountPage extends StatelessWidget {
               onTap: () {},
             ),
 
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
             ElevatedButton.icon(
               onPressed: () {},

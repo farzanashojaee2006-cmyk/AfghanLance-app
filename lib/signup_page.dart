@@ -1,10 +1,13 @@
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/login_page.dart';
+import 'package:afghanlance/services/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'onboarding/client/client_onboarding_page.dart';
 import 'onboarding/freelancer/freelancer_onboarding_page.dart';
+
 
 enum SignupMethod { email, phone }
 
@@ -22,6 +25,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   SignupMethod signupMethod = SignupMethod.email;
+  final AuthService _authService = AuthService();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -111,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30),
 
                   Text(
                     "AFGHANLANCE",
@@ -122,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30),
 
                   Text(
                     "Create Account",
@@ -133,7 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   Text(
                     "Welcome! Please fill the form to continue.",
@@ -142,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30),
 
                   Row(
                     children: [
@@ -159,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Expanded(
                         child: buildTextField(
                           hint: "Last Name",
@@ -176,7 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
 
                   if (signupMethod == SignupMethod.email)
                     buildTextField(
@@ -212,26 +217,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
 
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
 
                   buildTextField(
                     hint: "Public Username",
                     icon: Icons.alternate_email,
                     controller: usernameController,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return "Enter username";
                       }
 
-                      if (value.length < 5) {
-                        return "Minimum 5 characters";
+                      final username = value.trim().toLowerCase();
+
+                      if (username.length < 5) return "Minimum 5 characters";
+                      if (username.length > 20) return "Maximum 20 characters";
+
+                      if (!RegExp(r'^[a-z][a-z0-9._]*$').hasMatch(username)) {
+                        return "Use lowercase letters, numbers, . or _";
+                      }
+
+                      if (username.endsWith('.') || username.endsWith('_')) {
+                        return "Username cannot end with . or _";
+                      }
+
+                      if (username.contains('..') || username.contains('__')) {
+                        return "Invalid username format";
                       }
 
                       return null;
-                    },
-                  ),
+                    },                  ),
 
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
 
                   TextFormField(
                     readOnly: true,
@@ -259,7 +276,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
 
                   buildTextField(
                     hint: "Password",
@@ -297,7 +314,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
 
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   Text(
                     "Password must contain at least 8 characters, one uppercase letter, one number and one special character.",
@@ -308,7 +325,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
 
                   buildTextField(
                     hint: "Confirm Password",
@@ -334,7 +351,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
 
-                  const SizedBox(height: 25),
+                  SizedBox(height: 25),
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -344,27 +361,101 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => widget.isClient
-                              ? const ClientOnboardingPage()
-                              : const FreelancerOnboardingPage(),
-                        ),
-                      );
-                    },
-                    child: const Text(
+                      try {
+                        final username =
+                        usernameController.text.trim().toLowerCase();
+
+                        final usernameQuery = await FirebaseFirestore.instance
+                            .collection('users')
+                            .where('username', isEqualTo: username)
+                            .limit(1)
+                            .get();
+
+                        if (usernameQuery.docs.isNotEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "This username is already taken.",
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+
+                        final userCredential = await _authService.signUp(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                        );
+
+                        final user = userCredential.user;
+
+                        if (user == null) {
+                          throw FirebaseAuthException(
+                            code: "user-not-created",
+                          );
+                        }
+
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(user.uid)
+                            .set({
+                          'uid': user.uid,
+                          'firstName': firstNameController.text.trim(),
+                          'lastName': lastNameController.text.trim(),
+                          'email': emailController.text.trim(),
+                          'username': username,
+                          'country': countryController.text.trim(),
+                          'role': widget.isClient
+                              ? 'client'
+                              : 'freelancer',
+                          'profileImage': 'assets/images/profile.png',
+                          'isVerified': false,
+                          'isProfileCompleted': false,
+                          'createdAt': FieldValue.serverTimestamp(),
+                        });
+
+                        if (!mounted) return;
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => widget.isClient
+                                ?  ClientOnboardingPage()
+                                :  FreelancerOnboardingPage(),
+                          ),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        String message = "Registration failed";
+
+                        if (e.code == 'email-already-in-use') {
+                          message =
+                          "This email is already registered.";
+                        } else if (e.code == 'invalid-email') {
+                          message = "Invalid email address.";
+                        } else if (e.code == 'weak-password') {
+                          message = "Password is too weak.";
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(message)),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      }
+                    },                    child: const Text(
                       "Sign Up",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   Row(
                     children: [
@@ -390,7 +481,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   Center(
                     child: Container(
@@ -405,7 +496,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.g_mobiledata, color: kThirdColor),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           const Text(
                             "Continue with Google",
                             style: TextStyle(color: Colors.black),
@@ -415,7 +506,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -446,7 +537,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                 ],
               ),
             ),

@@ -2,8 +2,10 @@ import 'package:afghanlance/Setting_page/Setting_Screen.dart';
 import 'package:afghanlance/SkillCard.dart';
 import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
-import 'package:afghanlance/profile_page.dart';
+import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 
@@ -21,10 +23,48 @@ class _HomeScreenState extends State<HomePage> {
 
   int selectedIndex = 0;
 
+  String fullName = "User";
+  String email = "";
+  bool isLoadingUser = true;
+
+  String profileImage = "assets/images/profile.png";
+
   @override
   void initState() {
     super.initState();
     isClient = widget.isClient;
+    loadUserData();
+  }
+
+  ImageProvider getProfileImage() {
+    if (profileImage.startsWith('http')) {
+      return NetworkImage(profileImage);
+    }
+
+    return AssetImage(profileImage);
+  }
+
+  Future<void> loadUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) return;
+
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+
+    final data = doc.data();
+
+    if (data == null) return;
+
+    setState(() {
+      profileImage = data['profileImage'] ?? "assets/images/profile.png";
+      fullName = "${data['firstName'] ?? ''} ${data['lastName'] ?? ''}".trim();
+
+      email = data['email'] ?? user.email ?? "";
+      isLoadingUser = false;
+    });
   }
 
   @override
@@ -43,23 +83,21 @@ class _HomeScreenState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: isDark ? Colors.black87 : kThirdColor,
               ),
-
-              accountName: const Text("Farzana"),
-
-              accountEmail: const Text("farzanashojaee2006@gmail.com"),
+              accountName: Text(fullName),
+              accountEmail: Text(email),
 
               currentAccountPicture: GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => ProfilePage(isClient: isClient),
+                    ),
                   );
                 },
-
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   backgroundColor: Colors.white,
-
-                  child: Icon(Icons.person, size: 40, color: Colors.teal),
+                  backgroundImage: getProfileImage(),
                 ),
               ),
             ),
@@ -76,7 +114,9 @@ class _HomeScreenState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                  MaterialPageRoute(
+                    builder: (_) => ProfilePage(isClient: isClient),
+                  ),
                 );
               },
             ),
@@ -84,7 +124,13 @@ class _HomeScreenState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.settings_outlined, color: kThirdColor),
 
-              title: GestureDetector(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsPage()));},
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
+                },
                 child: Text(
                   "Settings",
 
@@ -95,15 +141,15 @@ class _HomeScreenState extends State<HomePage> {
               onTap: () {},
             ),
 
-
-
-
             ListTile(
               leading: Icon(Icons.help_outline, color: kThirdColor),
 
               title: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpPage()));
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HelpPage()),
+                  );
                 },
                 child: Text(
                   "Help & Support",
@@ -114,7 +160,6 @@ class _HomeScreenState extends State<HomePage> {
 
               onTap: () {},
             ),
-
 
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
@@ -161,7 +206,6 @@ class _HomeScreenState extends State<HomePage> {
             onPressed: () {},
           ),
 
-
           Padding(
             padding: const EdgeInsets.only(right: 12),
 
@@ -175,7 +219,10 @@ class _HomeScreenState extends State<HomePage> {
               ),
 
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatePostScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreatePostScreen()),
+                );
               },
 
               child: const Icon(Icons.add, color: Colors.white),
@@ -184,7 +231,9 @@ class _HomeScreenState extends State<HomePage> {
         ],
       ),
 
-      body: isClient
+      body: selectedIndex == 3
+          ? ProfilePage(isClient: isClient)
+          : isClient
           ? ClientView(isClient: isClient)
           : FreelancerView(isClient: isClient),
 
@@ -253,7 +302,7 @@ class _HomeScreenState extends State<HomePage> {
                     color: selectedIndex == 1 ? kThirdColor : Colors.grey,
                   ),
 
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
 
                   Text(
                     "Projects",
@@ -285,7 +334,7 @@ class _HomeScreenState extends State<HomePage> {
                     color: selectedIndex == 2 ? kThirdColor : Colors.grey,
                   ),
 
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
 
                   Text(
                     "Messages",
@@ -305,11 +354,6 @@ class _HomeScreenState extends State<HomePage> {
                 setState(() {
                   selectedIndex = 3;
                 });
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
-                );
               },
 
               child: Container(
@@ -441,11 +485,11 @@ class _CommonView extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isClient
+                      backgroundColor: !isClient
                           ? kThirdColor
                           : Colors.transparent,
 
-                      foregroundColor: isClient ? Colors.white : kThirdColor,
+                      foregroundColor: !isClient ? Colors.white : kThirdColor,
 
                       side: BorderSide(color: kThirdColor),
 
@@ -458,17 +502,16 @@ class _CommonView extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
 
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: !isClient
+                      backgroundColor: isClient
                           ? kThirdColor
                           : Colors.transparent,
 
-                      foregroundColor: !isClient ? Colors.white : kThirdColor,
-
+                      foregroundColor: isClient ? Colors.white : kThirdColor,
                       side: BorderSide(color: kThirdColor),
 
                       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -483,7 +526,7 @@ class _CommonView extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -514,7 +557,7 @@ class _CommonView extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
 
                       Text(
                         subtitle,
@@ -524,7 +567,7 @@ class _CommonView extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -543,7 +586,7 @@ class _CommonView extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
 
                 Container(
                   height: 110,
@@ -561,7 +604,7 @@ class _CommonView extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 25),
+          SizedBox(height: 25),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -605,7 +648,7 @@ class _CommonView extends StatelessWidget {
 
             proposals: "8",
           ),
-          const SizedBox(height: 50),
+          SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -624,7 +667,7 @@ class _CommonView extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

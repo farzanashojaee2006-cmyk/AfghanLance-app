@@ -114,7 +114,7 @@ title: "Resume Analytics",
 subtitle: "Track resume performance",
 ),
 
-const SizedBox(height: 20),
+SizedBox(height: 20),
 ],
 ),
 ),
@@ -165,7 +165,7 @@ Widget resumeTile({
           ),
         ),
 
-        const SizedBox(width: 14),
+        SizedBox(width: 14),
 
         Expanded(
           child: Column(
@@ -182,7 +182,7 @@ Widget resumeTile({
                 ),
               ),
 
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
 
               Text(
                 subtitle,
