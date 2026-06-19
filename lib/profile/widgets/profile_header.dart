@@ -64,7 +64,7 @@ class ProfileHeader extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final cardColor = isDark
-        ? const Color(0xFF1A1A1A)
+        ? Color(0xFF1A1A1A)
         : Colors.white;
 
     final textColor = isDark
@@ -77,7 +77,7 @@ class ProfileHeader extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 24),
+      padding: EdgeInsets.fromLTRB(18, 18, 18, 24),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(30),
@@ -137,7 +137,7 @@ class ProfileHeader extends StatelessWidget {
                       color: Colors.white.withOpacity(.92),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.edit_outlined,
                       color: kThirdColor,
                     ),
@@ -174,7 +174,7 @@ class ProfileHeader extends StatelessWidget {
                               width: 3,
                             ),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.check_rounded,
                             color: Colors.white,
                             size: 19,
@@ -222,7 +222,7 @@ class ProfileHeader extends StatelessWidget {
 
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: kThirdColor,
                         fontWeight: FontWeight.w800,
                         fontSize: 17,

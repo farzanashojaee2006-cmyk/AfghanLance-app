@@ -29,7 +29,7 @@ fontWeight: FontWeight.bold,
 ),
 
 body: SingleChildScrollView(
-padding: const EdgeInsets.all(16),
+padding: EdgeInsets.all(16),
 
 child: Column(
 children: [
@@ -132,8 +132,8 @@ Widget resumeTile({
   final theme = Theme.of(context);
 
   return Container(
-    margin: const EdgeInsets.only(bottom: 14),
-    padding: const EdgeInsets.all(14),
+    margin: EdgeInsets.only(bottom: 14),
+    padding: EdgeInsets.all(14),
 
     decoration: BoxDecoration(
       color: theme.cardColor,
@@ -152,7 +152,7 @@ Widget resumeTile({
       children: [
 
         Container(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: color.withOpacity(0.12),
             borderRadius: BorderRadius.circular(14),

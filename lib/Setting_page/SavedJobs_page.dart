@@ -9,7 +9,7 @@ class SavedJobsPage extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text("Saved Jobs"),
+        title: Text("Saved Jobs"),
       ),
       body: ListView(
         children: [
@@ -27,14 +27,14 @@ class SavedJobsPage extends StatelessWidget {
             },
 
             child: Card(
-              margin: const EdgeInsets.all(12),
+              margin: EdgeInsets.all(12),
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
 
               child: Padding(
-                padding: const EdgeInsets.all(14),
+                padding: EdgeInsets.all(14),
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class SavedJobsPage extends StatelessWidget {
 
                       children: [
 
-                        const Text(
+                        Text(
                           "Flutter Developer",
 
                           style: TextStyle(
@@ -57,7 +57,7 @@ class SavedJobsPage extends StatelessWidget {
 
                         IconButton(
 
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.bookmark,
                             color: Colors.teal,
                           ),
@@ -167,7 +167,7 @@ class SavedJobsPage extends StatelessWidget {
                             },
 
                             child:
-                            const Text("Apply Now"),
+                            Text("Apply Now"),
                           ),
                         ),
 
@@ -175,7 +175,7 @@ class SavedJobsPage extends StatelessWidget {
 
                         IconButton(
 
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.delete,
                             color: Colors.red,
                           ),

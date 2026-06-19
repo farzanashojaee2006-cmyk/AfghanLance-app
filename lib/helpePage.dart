@@ -6,14 +6,14 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6F8),
+      backgroundColor: Color(0xFFF4F6F8),
 
       appBar: AppBar(
-        title: const Text("Help"),
+        title: Text("Help"),
       ),
 
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         children: const [
 
           HelpTile(
@@ -58,18 +58,18 @@ class HelpTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: EdgeInsets.only(bottom: 15),
 
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
 
       child: ExpansionTile(
-        leading: const Icon(Icons.help_outline),
+        leading: Icon(Icons.help_outline),
         title: Text(title),
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             child: Text(subtitle),
           )
         ],

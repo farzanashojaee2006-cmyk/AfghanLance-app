@@ -26,19 +26,19 @@ class _AppearancePageState
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text("Appearance"),
+        title: Text("Appearance"),
       ),
 
       body: ListView(
         children: [
 
           SwitchListTile(
-            secondary: const Icon(Icons.dark_mode),
+            secondary: Icon(Icons.dark_mode),
 
-            title: const Text("Dark Mode"),
+            title: Text("Dark Mode"),
 
             subtitle:
-            const Text("Enable dark theme"),
+            Text("Enable dark theme"),
 
             value: darkMode,
 
@@ -52,44 +52,44 @@ class _AppearancePageState
           ),
 
           ListTile(
-            leading: const Icon(Icons.light_mode),
+            leading: Icon(Icons.light_mode),
 
-            title: const Text("Light Theme"),
+            title: Text("Light Theme"),
 
             subtitle:
-            const Text("Use light appearance"),
+            Text("Use light appearance"),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {},
           ),
 
           ListTile(
             leading:
-            const Icon(Icons.phone_android),
+            Icon(Icons.phone_android),
 
-            title: const Text("System Theme"),
+            title: Text("System Theme"),
 
-            subtitle: const Text(
+            subtitle: Text(
                 "Follow device settings"),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {},
           ),
 
           ListTile(
             leading:
-            const Icon(Icons.format_size),
+            Icon(Icons.format_size),
 
-            title: const Text("Font Size"),
+            title: Text("Font Size"),
 
             subtitle: Text(fontSize),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -102,14 +102,14 @@ class _AppearancePageState
 
           ListTile(
             leading:
-            const Icon(Icons.color_lens),
+            Icon(Icons.color_lens),
 
-            title: const Text("App Color"),
+            title: Text("App Color"),
 
             subtitle: Text(appColor),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -121,14 +121,14 @@ class _AppearancePageState
           ),
 
           ListTile(
-            leading: const Icon(Icons.language),
+            leading: Icon(Icons.language),
 
-            title: const Text("Language"),
+            title: Text("Language"),
 
             subtitle: Text(language),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -141,11 +141,11 @@ class _AppearancePageState
 
           SwitchListTile(
             secondary:
-            const Icon(Icons.animation),
+            Icon(Icons.animation),
 
-            title: const Text("Animations"),
+            title: Text("Animations"),
 
-            subtitle: const Text(
+            subtitle: Text(
                 "Enable app animations"),
 
             value: animations,
@@ -161,12 +161,12 @@ class _AppearancePageState
 
           SwitchListTile(
             secondary:
-            const Icon(Icons.rounded_corner),
+            Icon(Icons.rounded_corner),
 
             title:
-            const Text("Rounded Corners"),
+            Text("Rounded Corners"),
 
-            subtitle: const Text(
+            subtitle: Text(
                 "Use smooth UI corners"),
 
             value: roundedCorners,
@@ -182,14 +182,14 @@ class _AppearancePageState
 
           ListTile(
             leading:
-            const Icon(Icons.photo_size_select_large),
+            Icon(Icons.photo_size_select_large),
 
-            title: const Text("Icon Size"),
+            title: Text("Icon Size"),
 
             subtitle: Text(iconSize),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -201,16 +201,16 @@ class _AppearancePageState
           ),
           ListTile(
             leading:
-            const Icon(Icons.preview),
+            Icon(Icons.preview),
 
             title:
-            const Text("Theme Preview"),
+            Text("Theme Preview"),
 
-            subtitle: const Text(
+            subtitle: Text(
                 "Preview app appearance"),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 

@@ -8,35 +8,35 @@ class PrivacyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Privacy"),
+        title: Text("Privacy"),
       ),
 
       body: ListView(
         children: [
 
           ListTile(
-            leading: const Icon(Icons.lock),
-            title: const Text("Change Password"),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            leading: Icon(Icons.lock),
+            title: Text("Change Password"),
+            trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {},
           ),
 
           ListTile(
-            leading: const Icon(Icons.security),
-            title: const Text("Two-Step Verification"),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            leading: Icon(Icons.security),
+            title: Text("Two-Step Verification"),
+            trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {},
           ),
 
           ListTile(
-            leading: const Icon(Icons.visibility),
-            title: const Text("Account Visibility"),
-            subtitle: const Text("Public"),
+            leading: Icon(Icons.visibility),
+            title: Text("Account Visibility"),
+            subtitle: Text("Public"),
           ),
 
           ListTile(
-            leading: const Icon(Icons.email),
-            title: const Text("Show Email to Employers"),
+            leading: Icon(Icons.email),
+            title: Text("Show Email to Employers"),
             trailing: Switch(
               value: true,
               onChanged: (value) {},
@@ -44,8 +44,8 @@ class PrivacyPage extends StatelessWidget {
           ),
 
           ListTile(
-            leading: const Icon(Icons.phone),
-            title: const Text("Show Phone Number"),
+            leading: Icon(Icons.phone),
+            title: Text("Show Phone Number"),
             trailing: Switch(
               value: false,
               onChanged: (value) {},
@@ -53,23 +53,23 @@ class PrivacyPage extends StatelessWidget {
           ),
 
           ListTile(
-            leading: const Icon(Icons.block),
-            title: const Text("Blocked Companies"),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            leading: Icon(Icons.block),
+            title: Text("Blocked Companies"),
+            trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {},
           ),
 
           ListTile(
-            leading: const Icon(Icons.delete),
-            title: const Text("Delete Account"),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            leading: Icon(Icons.delete),
+            title: Text("Delete Account"),
+            trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {},
           ),
 
           ListTile(
-            leading: const Icon(Icons.policy),
-            title: const Text("Privacy Policy"),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            leading: Icon(Icons.policy),
+            title: Text("Privacy Policy"),
+            trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
 
               Navigator.push(

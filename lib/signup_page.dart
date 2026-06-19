@@ -106,11 +106,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: _formKey,
               child: Column(
@@ -449,7 +449,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SnackBar(content: Text(e.toString())),
                         );
                       }
-                    },                    child: const Text(
+                    },                    child: Text(
                       "Sign Up",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
@@ -465,7 +465,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           "Or",
                           style: TextStyle(
@@ -497,7 +497,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Icon(Icons.g_mobiledata, color: kThirdColor),
                           SizedBox(width: 8),
-                          const Text(
+                          Text(
                             "Continue with Google",
                             style: TextStyle(color: Colors.black),
                           ),

@@ -29,7 +29,7 @@ class FreelancerPortfolioSection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 14),
-            const Text(
+            Text(
               "No portfolio added yet",
               style: TextStyle(color: Colors.grey),
             ),
@@ -70,7 +70,7 @@ class FreelancerPortfolioSection extends StatelessWidget {
                         width: 120,
                         height: 145,
                         color:
-                        isDark ? Colors.white10 : const Color(0xFFE4F1F0),
+                        isDark ? Colors.white10 : Color(0xFFE4F1F0),
                         child: Icon(
                           Icons.image_outlined,
                           color: kThirdColor,

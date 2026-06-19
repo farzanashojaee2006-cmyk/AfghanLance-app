@@ -63,19 +63,19 @@ class _WelcomePageState extends State<WelcomePageTwo> {
 
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 30),
-                  const Text(
+                  Text(
                     "Work",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 34,
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Your Way",
                     style: TextStyle(
                       color: Color(0xFF2FD1C5),
@@ -126,7 +126,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                           ),
                         );
                       },
-                      child: const Text("Create account"),
+                      child: Text("Create account"),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -174,7 +174,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: selected ? Colors.white.withOpacity(0.15) : Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(20),
@@ -185,11 +185,11 @@ class _WelcomePageState extends State<WelcomePageTwo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.person, color: Colors.white),
+            Icon(Icons.person, color: Colors.white),
             SizedBox(height: 10),
             Text(
               title,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
             Text(

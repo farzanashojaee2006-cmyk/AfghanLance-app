@@ -21,11 +21,11 @@ class OtherInputBox extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 18),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(top: 18),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: isDark
-            ? const Color(0xFF1E1E1E)
+            ? Color(0xFF1E1E1E)
             : Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
@@ -59,9 +59,9 @@ class OtherInputBox extends StatelessWidget {
               ),
               filled: true,
               fillColor: isDark
-                  ? const Color(0xFF121212)
+                  ? Color(0xFF121212)
                   : kLightColor,
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: 18,
                 vertical: 16,
               ),
@@ -98,7 +98,7 @@ class OtherInputBox extends StatelessWidget {
               ),
               child: Text(
                 buttonText,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w800,
                   fontSize: 15,

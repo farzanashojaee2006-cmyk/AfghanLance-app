@@ -57,10 +57,10 @@ class _FreelancerProfileViewState extends State<FreelancerProfileView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 110),
+          padding: EdgeInsets.fromLTRB(20, 18, 20, 110),
           child: Column(
             children: [
               FreelancerHeader(

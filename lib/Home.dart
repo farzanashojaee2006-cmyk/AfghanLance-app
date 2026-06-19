@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomePage> {
 
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        backgroundColor: isDark ? Color(0xFF1E1E1E) : Colors.white,
 
         child: ListView(
           padding: EdgeInsets.zero,
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomePage> {
             ),
 
             ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
+              leading: Icon(Icons.logout, color: Colors.red),
 
               title: Text(
                 "Log out",
@@ -176,12 +176,12 @@ class _HomeScreenState extends State<HomePage> {
         ),
       ),
 
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
 
       appBar: AppBar(
         elevation: 0,
 
-        backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+        backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
 
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
 
@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomePage> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(right: 12),
+            padding: EdgeInsets.only(right: 12),
 
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomePage> {
 
                 shape: const CircleBorder(),
 
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
               ),
 
               onPressed: () {
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomePage> {
                 );
               },
 
-              child: const Icon(Icons.add, color: Colors.white),
+              child: Icon(Icons.add, color: Colors.white),
             ),
           ),
         ],
@@ -240,10 +240,10 @@ class _HomeScreenState extends State<HomePage> {
       bottomNavigationBar: Container(
         height: 85,
 
-        margin: const EdgeInsets.all(12),
+        margin: EdgeInsets.all(12),
 
         decoration: BoxDecoration(
-          color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          color: isDark ? Color(0xFF1E1E1E) : Colors.white,
 
           borderRadius: BorderRadius.circular(28),
 
@@ -448,7 +448,7 @@ class _CommonView extends StatelessWidget {
 
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
 
             child: TextField(
               style: TextStyle(color: isDark ? Colors.white : Colors.black87),
@@ -460,9 +460,9 @@ class _CommonView extends StatelessWidget {
                   color: isDark ? Colors.white54 : Colors.grey,
                 ),
 
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon: Icon(Icons.search, color: Colors.grey),
 
-                suffixIcon: const Icon(Icons.tune, color: Colors.grey),
+                suffixIcon: Icon(Icons.tune, color: Colors.grey),
 
                 filled: true,
 
@@ -478,7 +478,7 @@ class _CommonView extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
 
             child: Row(
               children: [
@@ -493,12 +493,12 @@ class _CommonView extends StatelessWidget {
 
                       side: BorderSide(color: kThirdColor),
 
-                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.symmetric(vertical: 15),
                     ),
 
                     onPressed: () {},
 
-                    child: const Text("Freelancer"),
+                    child: Text("Freelancer"),
                   ),
                 ),
 
@@ -514,12 +514,12 @@ class _CommonView extends StatelessWidget {
                       foregroundColor: isClient ? Colors.white : kThirdColor,
                       side: BorderSide(color: kThirdColor),
 
-                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.symmetric(vertical: 15),
                     ),
 
                     onPressed: () {},
 
-                    child: const Text("Employer"),
+                    child: Text("Employer"),
                   ),
                 ),
               ],
@@ -529,9 +529,9 @@ class _CommonView extends StatelessWidget {
           SizedBox(height: 20),
 
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
+            margin: EdgeInsets.symmetric(horizontal: 16),
 
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
 
             decoration: BoxDecoration(
               color: isDark ? Colors.white10 : Colors.white,
@@ -571,7 +571,7 @@ class _CommonView extends StatelessWidget {
 
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFE6F4F7),
+                          backgroundColor: Color(0xFFE6F4F7),
                         ),
 
                         onPressed: () {},
@@ -593,7 +593,7 @@ class _CommonView extends StatelessWidget {
                   width: 110,
 
                   decoration: BoxDecoration(
-                    color: isDark ? Colors.white12 : const Color(0xFFF0F9F0),
+                    color: isDark ? Colors.white12 : Color(0xFFF0F9F0),
 
                     borderRadius: BorderRadius.circular(18),
                   ),
@@ -607,7 +607,7 @@ class _CommonView extends StatelessWidget {
           SizedBox(height: 25),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
 
             child: Text(
               'Suggested Projects',
@@ -650,7 +650,7 @@ class _CommonView extends StatelessWidget {
           ),
           SizedBox(height: 50),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -671,7 +671,7 @@ class _CommonView extends StatelessWidget {
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               children: [
                 SkillCard(icon: Icons.phone_android, label: 'Mobile Dev'),

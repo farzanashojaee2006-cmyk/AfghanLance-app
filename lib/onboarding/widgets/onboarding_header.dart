@@ -41,7 +41,7 @@ class OnboardingHeader extends StatelessWidget {
 
                   return Expanded(
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      margin: EdgeInsets.symmetric(horizontal: 4),
                       height: 5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),

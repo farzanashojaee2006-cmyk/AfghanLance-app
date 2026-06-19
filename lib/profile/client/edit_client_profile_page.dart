@@ -143,10 +143,10 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+        backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
         iconTheme: IconThemeData(
           color: isDark ? Colors.white : Colors.black,
         ),
@@ -159,7 +159,7 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 14, 20, 110),
+        padding: EdgeInsets.fromLTRB(20, 14, 20, 110),
         child: Column(
           children: [
             _avatar(isDark),
@@ -217,14 +217,14 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
                     children: categories.map((category) {
                       return Chip(
                         label: Text(category),
-                        deleteIcon: const Icon(Icons.close, size: 18),
+                        deleteIcon: Icon(Icons.close, size: 18),
                         onDeleted: () => removeCategory(category),
                         backgroundColor: isDark
-                            ? const Color(0xFF233A3A)
-                            : const Color(0xFFE4F1F0),
+                            ? Color(0xFF233A3A)
+                            : Color(0xFFE4F1F0),
                         labelStyle: TextStyle(
                           color: isDark
-                              ? const Color(0xFFA8DDD8)
+                              ? Color(0xFFA8DDD8)
                               : kThirdColor,
                           fontWeight: FontWeight.w700,
                         ),
@@ -263,7 +263,7 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(20, 0, 20, 18),
+        minimum: EdgeInsets.fromLTRB(20, 0, 20, 18),
         child: SizedBox(
           height: 58,
           child: ElevatedButton(
@@ -276,7 +276,7 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: const Text(
+            child:  Text(
               "Save Changes",
               style: TextStyle(
                 color: Colors.white,
@@ -296,7 +296,7 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
         children: [
           CircleAvatar(
             radius: 62,
-            backgroundColor: isDark ? const Color(0xFF242424) : Colors.white,
+            backgroundColor: isDark ?  Color(0xFF242424) : Colors.white,
             child: CircleAvatar(
               radius: 57,
               backgroundImage: profileImage,
@@ -315,11 +315,11 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
                   color: kThirdColor,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: isDark ? const Color(0xFF121212) : kFirstColor,
+                    color: isDark ? Color(0xFF121212) : kFirstColor,
                     width: 3,
                   ),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.camera_alt_rounded,
                   color: Colors.white,
                   size: 18,
@@ -338,9 +338,9 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
   }) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      padding: EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF222629) : Colors.white,
+        color: isDark ? Color(0xFF222629) : Colors.white,
         borderRadius: BorderRadius.circular(26),
         boxShadow: [
           BoxShadow(
@@ -400,18 +400,18 @@ class _EditClientProfilePageState extends State<EditClientProfilePage> {
         color: kThirdColor,
       ),
       filled: true,
-      fillColor: isDark ? const Color(0xFF242424) : Colors.white,
+      fillColor: isDark ? Color(0xFF242424) : Colors.white,
       labelStyle: TextStyle(
         color: isDark ? Colors.white60 : Colors.grey[600],
       ),
-      contentPadding: const EdgeInsets.symmetric(
+      contentPadding: EdgeInsets.symmetric(
         horizontal: 14,
         vertical: 18,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(18),
         borderSide: BorderSide(
-          color: isDark ? Colors.white10 : const Color(0xFFE6EEEE),
+          color: isDark ? Colors.white10 : Color(0xFFE6EEEE),
         ),
       ),
       focusedBorder: OutlineInputBorder(

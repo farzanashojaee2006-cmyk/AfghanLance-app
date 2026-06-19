@@ -27,15 +27,15 @@ class _NotificationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notification"),
+        title: Text("Notification"),
       ),
 
       body: ListView(
         children: [
 
           SwitchListTile(
-            secondary: const Icon(Icons.work),
-            title: const Text("New Job Alerts"),
+            secondary: Icon(Icons.work),
+            title: Text("New Job Alerts"),
             value: newJobs,
             onChanged: (value) {
               setState(() {
@@ -45,8 +45,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.description),
-            title: const Text("Application Status"),
+            secondary: Icon(Icons.description),
+            title: Text("Application Status"),
             value: applicationStatus,
             onChanged: (value) {
               setState(() {
@@ -56,8 +56,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.message),
-            title: const Text("Messages"),
+            secondary: Icon(Icons.message),
+            title: Text("Messages"),
 
             value: messages,
             onChanged: (value) {
@@ -68,8 +68,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.video_call),
-            title: const Text("Interview Invites"),
+            secondary: Icon(Icons.video_call),
+            title: Text("Interview Invites"),
             value: interviewInvites,
             onChanged: (value) {
               setState(() {
@@ -79,8 +79,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.bookmark),
-            title: const Text("Saved Jobs Alerts"),
+            secondary: Icon(Icons.bookmark),
+            title: Text("Saved Jobs Alerts"),
             value: savedJobsAlerts,
             onChanged: (value) {
               setState(() {
@@ -90,8 +90,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.remove_red_eye),
-            title: const Text("Profile Views"),
+            secondary: Icon(Icons.remove_red_eye),
+            title: Text("Profile Views"),
             value: profileViews,
             onChanged: (value) {
               setState(() {
@@ -101,8 +101,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.recommend),
-            title: const Text("Job Recommendations"),
+            secondary: Icon(Icons.recommend),
+            title: Text("Job Recommendations"),
             value: jobRecommendations,
             onChanged: (value) {
               setState(() {
@@ -112,8 +112,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.security),
-            title: const Text("Account Updates"),
+            secondary: Icon(Icons.security),
+            title: Text("Account Updates"),
             value: accountUpdates,
             onChanged: (value) {
               setState(() {
@@ -123,8 +123,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: const Icon(Icons.email),
-            title: const Text("Marketing Emails"),
+            secondary: Icon(Icons.email),
+            title: Text("Marketing Emails"),
             value: marketingEmails,
             onChanged: (value) {
               setState(() {
