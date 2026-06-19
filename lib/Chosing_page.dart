@@ -2,6 +2,8 @@ import 'package:afghanlance/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/signup_page.dart';
 
+import 'login_page.dart';
+
 
 
 class WelcomePageTwo extends StatefulWidget {
@@ -65,7 +67,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30),
                   const Text(
                     "Work",
                     style: TextStyle(
@@ -81,7 +83,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
                   Text(
                     "Find talent, manage projects and pay — all in one flow.",
                     style: TextStyle(
@@ -100,7 +102,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                           onTap: () => setState(() => isClient = true),
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      SizedBox(width: 20),
                       Expanded(
                         child: _buildCard(
                           title: "I’m a freelancer",
@@ -111,7 +113,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25),
+                  SizedBox(height: 25),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -127,7 +129,7 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                       child: const Text("Create account"),
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -137,15 +139,14 @@ class _WelcomePageState extends State<WelcomePageTwo> {
                           color: Colors.white.withOpacity(0.8),
                         ),
                       ),GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => HomePage(isClient: true),
+                              builder: (_) => const LoginScreen(),
                             ),
                           );
-                        },
-                        child: Text(
+                        },                        child: Text(
                           "Log in",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
@@ -185,12 +186,12 @@ class _WelcomePageState extends State<WelcomePageTwo> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Icon(Icons.person, color: Colors.white),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Text(
               title,
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 5),
             Text(
               subtitle,
               style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 12),

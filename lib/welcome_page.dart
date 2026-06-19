@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui';
+import 'Chosing_page.dart';
 import 'constants.dart';
 
 class WelcomePageOne extends StatefulWidget {
@@ -51,7 +52,14 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
     Future.delayed(const Duration(seconds: 4), () {
       if (mounted) {
 
-        Navigator.pushReplacementNamed(context, '/welcome');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => WelcomePageTwo(
+              onToggleTheme: widget.onToggleTheme,
+            ),
+          ),
+        );
       }
     });
   }
@@ -135,7 +143,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 12),
+                                SizedBox(height: 12),
 
                                 Opacity(
                                   opacity: _textOpacity.value,

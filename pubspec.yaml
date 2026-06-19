@@ -42,7 +42,7 @@ dependencies:
   file_picker: ^10.1.9
 
   flutter_launcher_icons: ^0.14.4
-  image_picker: ^1.0.4
+  image_picker: ^1.2.2
   google_fonts: ^8.1.0
   http: ^1.6.0
   font_awesome_flutter: ^11.0.0
@@ -86,6 +86,7 @@ flutter:
   assets:
     - assets/images/hand.png
     - assets/images/p.jpg
+    - assets/images/profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

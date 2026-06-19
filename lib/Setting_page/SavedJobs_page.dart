@@ -77,9 +77,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                    const Row(
+                    Row(
                       children: [
 
                         Icon(Icons.business),
@@ -90,9 +90,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                    const Row(
+                    Row(
                       children: [
 
                         Icon(Icons.location_on,
@@ -104,9 +104,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                    const Row(
+                    Row(
                       children: [
 
                         Icon(Icons.attach_money,
@@ -118,9 +118,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                    const Row(
+                    Row(
                       children: [
 
                         Icon(Icons.work,
@@ -132,9 +132,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                    const Row(
+                    Row(
                       children: [
 
                         Icon(Icons.access_time,
@@ -146,7 +146,7 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20),
 
                     Row(
                       children: [
@@ -171,7 +171,7 @@ class SavedJobsPage extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(width: 10),
+                        SizedBox(width: 10),
 
                         IconButton(
 

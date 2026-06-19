@@ -54,7 +54,7 @@ class SettingsPage extends StatelessWidget{
                   backgroundImage: const AssetImage('assets/profile.jpg'),
 
                 ),
-                const SizedBox(width: 14),
+                SizedBox(width: 14),
 
 
                 Expanded(
@@ -72,7 +72,7 @@ class SettingsPage extends StatelessWidget{
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis
                       ),
-                      const SizedBox(height: 15),
+                      SizedBox(height: 15),
                       Container(
                         padding: const EdgeInsets.symmetric (horizontal: 22, vertical: 11),
                         decoration: BoxDecoration(

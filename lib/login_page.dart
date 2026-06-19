@@ -1,3 +1,6 @@
+import 'package:afghanlance/services/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/Home.dart';
@@ -13,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
@@ -183,15 +187,82 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => HomePage(isClient: false),
-                        ),
-                      );
+                      try {
+                        String loginInput = emailController.text.trim();
+                        String emailForLogin = loginInput;
+
+
+                        if (!loginInput.contains('@')) {
+                          final query = await FirebaseFirestore.instance
+                              .collection('users')
+                              .where('username', isEqualTo: loginInput)
+                              .limit(1)
+                              .get();
+
+                          if (query.docs.isEmpty) {
+                            throw FirebaseAuthException(
+                              code: 'user-not-found',
+                              message: 'No user found with this username.',
+                            );
+                          }
+
+                          emailForLogin = query.docs.first.data()['email'];
+                        }
+
+                        final userCredential = await _authService.login(
+                          email: emailForLogin,
+                          password: passwordController.text.trim(),
+                        );
+
+                        final uid = userCredential.user!.uid;
+
+                        final doc = await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .get();
+
+                        final data = doc.data();
+
+                        if (data == null) {
+                          throw Exception("User data not found");
+                        }
+
+                        final isClient = data['role'] == 'client';
+
+                        if (!mounted) return;
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => HomePage(
+                              isClient: isClient,
+                            ),
+                          ),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        String message = "Login failed";
+
+                        if (e.code == 'user-not-found') {
+                          message = "No user found with this email/username";
+                        } else if (e.code == 'wrong-password') {
+                          message = "Wrong password";
+                        } else if (e.code == 'invalid-credential') {
+                          message = "Email/Username or password is incorrect";
+                        } else if (e.message != null) {
+                          message = e.message!;
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(message)),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      }
                     },
                     child:Text(
                       "Login",

@@ -57,11 +57,11 @@ class OnboardingHeader extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 48),
+            SizedBox(width: 48),
           ],
         ),
 
-        const SizedBox(height: 22),
+        SizedBox(height: 22),
 
         Text(
           "Step $currentStep of $totalSteps",
@@ -71,7 +71,7 @@ class OnboardingHeader extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 22),
+        SizedBox(height: 22),
 
         Text(
           title,
@@ -84,7 +84,7 @@ class OnboardingHeader extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
 
         Text(
           subtitle,

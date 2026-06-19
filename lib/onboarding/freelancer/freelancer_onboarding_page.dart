@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Home.dart';
 import '../success_screen.dart';
@@ -74,16 +76,35 @@ class _FreelancerOnboardingPageState extends State<FreelancerOnboardingPage> {
     return service ?? "-";
   }
 
-  void nextStep() {
+  Future<void> nextStep() async {
     if (!canGoNext) return;
 
     if (step < totalSteps) {
       setState(() => step++);
     } else {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({
+          'title': finalService,
+          'experience': experience,
+          'skills': skills,
+          'topSkills': skills.take(5).toList(),
+          'about': bio.trim(),
+          'isProfileCompleted': true,
+          'updatedAt': FieldValue.serverTimestamp(),
+        });
+      }
+
+      if (!mounted) return;
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => const SuccessScreen(isClient: false),
+          builder: (_) =>  SuccessScreen(isClient: false),
         ),
       );
     }
@@ -164,7 +185,7 @@ class _FreelancerOnboardingPageState extends State<FreelancerOnboardingPage> {
       body: OnboardingBackground(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
+            padding:  EdgeInsets.symmetric(horizontal: 22),
             child: step == 0
                 ? OnboardingWelcome(onStart: nextStep)
                 : Column(
@@ -176,22 +197,22 @@ class _FreelancerOnboardingPageState extends State<FreelancerOnboardingPage> {
                   subtitle: subtitle,
                   onBack: previousStep,
                 ),
-                const SizedBox(height: 26),
+                SizedBox(height: 26),
                 Expanded(
                   child: SingleChildScrollView(
                     child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
+                      duration:  Duration(milliseconds: 250),
                       child: buildStep(),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 OnboardingButton(
                   text: step == totalSteps ? "Finish Setup" : "Next",
                   enabled: canGoNext,
                   onPressed: nextStep,
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: 18),
               ],
             ),
           ),
@@ -300,7 +321,7 @@ class _FreelancerOnboardingPageState extends State<FreelancerOnboardingPage> {
 
   Widget buildReview() {
     return Column(
-      key: const ValueKey("freelancer_review"),
+      key:  ValueKey("freelancer_review"),
       children: [
         ReviewTile(
           title: "Field",
@@ -363,9 +384,9 @@ class _BioBoxState extends State<_BioBox> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        color: isDark ?  Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(26),
         border: Border.all(
           color: isDark ? Colors.white12 : Colors.black12,
@@ -418,10 +439,10 @@ class ReviewTile extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 14),
-      padding: const EdgeInsets.all(18),
+      margin:  EdgeInsets.only(bottom: 14),
+      padding:  EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        color: isDark ?  Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
           color: isDark ? Colors.white10 : Colors.black12,
@@ -430,7 +451,7 @@ class ReviewTile extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(isDark ? .18 : .05),
             blurRadius: 18,
-            offset: const Offset(0, 9),
+            offset:  Offset(0, 9),
           ),
         ],
       ),
@@ -441,7 +462,7 @@ class ReviewTile extends StatelessWidget {
             backgroundColor: accent.withOpacity(.12),
             child: Icon(icon, color: accent),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -453,7 +474,7 @@ class ReviewTile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: 5),
                 Text(
                   value,
                   style: TextStyle(

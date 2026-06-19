@@ -187,7 +187,7 @@ class _JobPreferencesScreenState
               },
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -239,7 +239,7 @@ class _JobPreferencesScreenState
             ),
           ),
 
-          const SizedBox(width: 14),
+          SizedBox(width: 14),
 
           Expanded(
             child: Column(
@@ -256,7 +256,7 @@ class _JobPreferencesScreenState
                   ),
                 ),
 
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
 
                 Text(
                   subtitle,
@@ -324,7 +324,7 @@ class _JobPreferencesScreenState
             ),
           ),
 
-          const SizedBox(width: 14),
+          SizedBox(width: 14),
 
           Expanded(
             child: Text(
@@ -396,7 +396,7 @@ class _JobPreferencesScreenState
             ),
           ),
 
-          const SizedBox(width: 14),
+          SizedBox(width: 14),
 
           Expanded(
             child: Text(
@@ -411,7 +411,7 @@ class _JobPreferencesScreenState
 
           DropdownButton<String>(
             value: value,
-            underline: const SizedBox(),
+            underline: SizedBox(),
 
             items: items.map((item) {
               return DropdownMenuItem(

@@ -348,7 +348,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
 
 
@@ -400,7 +400,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
                     Text(
                       selectedFile!.path

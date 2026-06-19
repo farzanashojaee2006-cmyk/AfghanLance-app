@@ -26,13 +26,13 @@ class SupportPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             const Text(
               "Our support team is here to help you anytime.",
             ),
 
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
             supportCard(
               Icons.email,
@@ -40,7 +40,7 @@ class SupportPage extends StatelessWidget {
               "support@yourapp.com",
             ),
 
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
 
             supportCard(
               Icons.phone,
@@ -48,7 +48,7 @@ class SupportPage extends StatelessWidget {
               "+93 700 000 000",
             ),
 
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
 
             supportCard(
               Icons.chat,
@@ -80,7 +80,7 @@ class SupportPage extends StatelessWidget {
             child: Icon(icon),
           ),
 
-          const SizedBox(width: 15),
+          SizedBox(width: 15),
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +93,7 @@ class SupportPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 5),
+              SizedBox(height: 5),
 
               Text(subtitle),
             ],

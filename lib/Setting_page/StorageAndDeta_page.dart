@@ -31,7 +31,7 @@ class _StorageDataPageState
 
         children: [
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
 
           ListTile(
 

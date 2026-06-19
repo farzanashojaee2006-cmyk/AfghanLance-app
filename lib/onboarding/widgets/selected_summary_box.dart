@@ -15,7 +15,7 @@ class SelectedSummaryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SizedBox();
+    if (items.isEmpty) return SizedBox();
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 

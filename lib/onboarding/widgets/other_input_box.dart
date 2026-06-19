@@ -82,7 +82,7 @@ class OtherInputBox extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 14),
+          SizedBox(height: 14),
 
           SizedBox(
             width: double.infinity,
