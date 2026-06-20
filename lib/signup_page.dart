@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 30),
+                  SizedBox(height: 35),
 
                   Text(
                     "Create Account",
