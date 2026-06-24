@@ -9,12 +9,16 @@ class FreelancerHeader extends StatelessWidget {
   final FreelancerProfileModel profile;
   final VoidCallback onEditTap;
   final VoidCallback onPortfolioTap;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const FreelancerHeader({
     super.key,
     required this.profile,
     required this.onEditTap,
     required this.onPortfolioTap,
+    this.isMyProfile= true,
+    this.onMessageTap
   });
 
   @override
@@ -73,6 +77,7 @@ class FreelancerHeader extends StatelessWidget {
                 ),
               ),
 
+              if(isMyProfile)
               Positioned(
                 top: 14,
                 right: 14,
@@ -90,7 +95,7 @@ class FreelancerHeader extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.edit_outlined,
-                      color: isDark? kFirstColor: kThirdColor,
+                      color: isDark ? kFirstColor : kThirdColor,
                       size: 21,
                     ),
                   ),
@@ -180,8 +185,6 @@ class FreelancerHeader extends StatelessWidget {
 
           SizedBox(height: 60),
 
-
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -207,6 +210,25 @@ class FreelancerHeader extends StatelessWidget {
               ),
             ],
           ),
+          if (!isMyProfile) ...[
+            SizedBox(height: 22),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kThirdColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                onPressed: onMessageTap,
+                icon: const Icon(Icons.message_outlined),
+                label: const Text("Message"),
+              ),
+            ),
+          ],
         ],
       ),
     );

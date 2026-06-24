@@ -31,8 +31,9 @@ class ProfileHeader extends StatelessWidget {
 
   final VoidCallback onEditTap;
   final VoidCallback onSecondButtonTap;
-
   final String secondButtonText;
+  final bool isMyProfile;
+  final VoidCallback? onContactTap;
 
   const ProfileHeader({
     super.key,
@@ -57,6 +58,8 @@ class ProfileHeader extends StatelessWidget {
     required this.onEditTap,
     required this.onSecondButtonTap,
     required this.secondButtonText,
+    this.isMyProfile = true,
+    this.onContactTap,
   });
 
   @override
@@ -124,26 +127,27 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
 
-              Positioned(
-                top: 14,
-                right: 14,
-                child: InkWell(
-                  onTap: onEditTap,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.92),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.edit_outlined,
-                      color: kThirdColor,
+              if (isMyProfile)
+                Positioned(
+                  top: 14,
+                  right: 14,
+                  child: InkWell(
+                    onTap: onEditTap,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(.92),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.edit_outlined,
+                        color: kThirdColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
               Positioned(
                 left: 20,
@@ -304,9 +308,11 @@ class ProfileHeader extends StatelessWidget {
             children: [
               Expanded(
                 child: ProfilePrimaryButton(
-                  text: "Contact",
+                  text: isMyProfile ? "Contact" : "Message",
                   icon: Icons.chat_bubble_outline_rounded,
-                  onTap: () {},
+                  onTap: isMyProfile
+                      ? () {}
+                      : (onContactTap ?? () {}),
                 ),
               ),
               SizedBox(width: 12),

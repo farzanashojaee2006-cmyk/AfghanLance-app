@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 
 import '../../models/client_profile_model.dart';
-import '../../widgets/profile_chip.dart';
 import '../../widgets/profile_stat_item.dart';
 
 class ClientHeader extends StatelessWidget {
   final ClientProfileModel profile;
   final VoidCallback onEditTap;
   final VoidCallback onProjectsTap;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const ClientHeader({
     super.key,
     required this.profile,
     required this.onEditTap,
     required this.onProjectsTap,
+    this.isMyProfile = true,
+    this.onMessageTap,
   });
 
   @override
@@ -61,11 +64,7 @@ class ClientHeader extends StatelessWidget {
                 ),
               ),
 
-              Positioned.fill(
-                child: CustomPaint(
-                  painter: HeaderWavePainter(),
-                ),
-              ),
+              Positioned.fill(child: CustomPaint(painter: HeaderWavePainter())),
 
               Positioned(
                 bottom: 0,
@@ -73,36 +72,33 @@ class ClientHeader extends StatelessWidget {
                 right: 0,
                 child: ClipPath(
                   clipper: ProfileWaveClipper(),
-                  child: Container(
-                    height: 95,
-                    color: cardColor,
-                  ),
+                  child: Container(height: 95, color: cardColor),
                 ),
               ),
-
-              Positioned(
-                top: 14,
-                right: 14,
-                child: InkWell(
-                  onTap: onEditTap,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? Colors.black.withOpacity(.35)
-                          : Colors.white.withOpacity(.95),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.edit_outlined,
-                      color: isDark? kFirstColor: kThirdColor,
-                      size: 21,
+              if (isMyProfile)
+                Positioned(
+                  top: 14,
+                  right: 14,
+                  child: InkWell(
+                    onTap: onEditTap,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? Colors.black.withOpacity(.35)
+                            : Colors.white.withOpacity(.95),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.edit_outlined,
+                        color: isDark ? kFirstColor : kThirdColor,
+                        size: 21,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
               Positioned(
                 left: 16,
@@ -115,10 +111,11 @@ class ClientHeader extends StatelessWidget {
                       backgroundColor: cardColor,
                       child: CircleAvatar(
                         radius: 52,
-                        backgroundImage: AssetImage('assets/images/profile.png'),
+                        backgroundImage: AssetImage(
+                          'assets/images/profile.png',
+                        ),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -181,10 +178,7 @@ class ClientHeader extends StatelessWidget {
                             profile.location,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: subTextColor,
-                              fontSize: 12,
-                            ),
+                            style: TextStyle(color: subTextColor, fontSize: 12),
                           ),
                         ),
                       ],
@@ -222,6 +216,25 @@ class ClientHeader extends StatelessWidget {
               ),
             ],
           ),
+          if (!isMyProfile) ...[
+            SizedBox(height: 22),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kThirdColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                onPressed: onMessageTap,
+                icon: const Icon(Icons.message_outlined),
+                label: const Text("Message"),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -280,19 +293,9 @@ class ProfileWaveClipper extends CustomClipper<Path> {
 
     path.lineTo(0, 45);
 
-    path.quadraticBezierTo(
-      size.width * .25,
-      5,
-      size.width * .5,
-      30,
-    );
+    path.quadraticBezierTo(size.width * .25, 5, size.width * .5, 30);
 
-    path.quadraticBezierTo(
-      size.width * .75,
-      55,
-      size.width,
-      15,
-    );
+    path.quadraticBezierTo(size.width * .75, 55, size.width, 15);
 
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);

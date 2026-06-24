@@ -11,11 +11,15 @@ import 'widgets/client_reviews_section.dart';
 class ClientProfileView extends StatefulWidget {
   final ClientProfileModel profile;
   final bool showBottomNav;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const ClientProfileView({
     super.key,
     required this.profile,
-    this.showBottomNav= false
+    this.showBottomNav= false,
+    this.isMyProfile = true,
+    this.onMessageTap,
   });
 
   @override
@@ -65,6 +69,8 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                 profile: profile,
                 onEditTap: openEditPage,
                 onProjectsTap: openProjects,
+                isMyProfile: widget.isMyProfile,
+                onMessageTap: widget.onMessageTap,
               ),
                SizedBox(height: 18),
               ClientAboutSection(profile: profile),

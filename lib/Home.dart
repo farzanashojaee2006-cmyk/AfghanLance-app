@@ -4,10 +4,12 @@ import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
+import 'package:afghanlance/project_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
+import 'package:afghanlance/messenger/pages/chat_list_page.dart';
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -195,43 +197,42 @@ class _HomeScreenState extends State<HomePage> {
           ),
         ),
 
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-
-              color: isDark ? Colors.white : Colors.black87,
-            ),
-
-            onPressed: () {},
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(right: 12),
-
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kThirdColor,
-
-                shape: const CircleBorder(),
-
-                padding: EdgeInsets.all(12),
-              ),
-
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CreatePostScreen()),
-                );
-              },
-
-              child: Icon(Icons.add, color: Colors.white),
-            ),
-          ),
-        ],
+        actions: selectedIndex == 0
+            ? [
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications_none,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                  onPressed: () {},
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kThirdColor,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(12),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreatePostScreen(),
+                        ),
+                      );
+                    },
+                    child: const Icon(Icons.add, color: Colors.white),
+                  ),
+                ),
+              ]
+            : [],
       ),
-
-      body: selectedIndex == 3
+      body: selectedIndex == 1
+          ? const ProjectsPage()
+          : selectedIndex == 2
+          ? ChatListPage()
+          : selectedIndex == 3
           ? ProfilePage(isClient: isClient)
           : isClient
           ? ClientView(isClient: isClient)
@@ -292,28 +293,24 @@ class _HomeScreenState extends State<HomePage> {
                 });
               },
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Container(
+                height: 60,
+                width: 60,
 
-                children: [
-                  Icon(
-                    Icons.work_outline,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
 
-                    color: selectedIndex == 1 ? kThirdColor : Colors.grey,
-                  ),
+                  color: selectedIndex == 1 ? kThirdColor : Colors.transparent,
 
-                  SizedBox(height: 4),
-
-                  Text(
-                    "Projects",
-
-                    style: TextStyle(
-                      color: selectedIndex == 1 ? kThirdColor : Colors.grey,
-
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+                  boxShadow: selectedIndex == 1
+                      ? [BoxShadow(color: Colors.black12, blurRadius: 8)]
+                      : [],
+                ),
+                child: Icon(
+                  Icons.work_outline,
+                  color: selectedIndex == 1 ? Colors.white : Colors.grey,
+                  size: 30,
+                ),
               ),
             ),
 
@@ -324,28 +321,25 @@ class _HomeScreenState extends State<HomePage> {
                 });
               },
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Container(
+                height: 60,
+                width: 60,
 
-                children: [
-                  Icon(
-                    Icons.message_outlined,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
 
-                    color: selectedIndex == 2 ? kThirdColor : Colors.grey,
-                  ),
+                  color: selectedIndex == 2 ? kThirdColor : Colors.transparent,
 
-                  SizedBox(height: 4),
+                  boxShadow: selectedIndex == 2
+                      ? [BoxShadow(color: Colors.black12, blurRadius: 8)]
+                      : [],
+                ),
 
-                  Text(
-                    "Messages",
-
-                    style: TextStyle(
-                      color: selectedIndex == 2 ? kThirdColor : Colors.grey,
-
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+                child: Icon(
+                  Icons.message_outlined,
+                  color: selectedIndex == 2 ? Colors.white : Colors.grey,
+                  size: 30,
+                ),
               ),
             ),
 
