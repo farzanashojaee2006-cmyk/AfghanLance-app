@@ -86,7 +86,7 @@ class SelectedSummaryBox extends StatelessWidget {
                             color: kThirdColor,
                             borderRadius: BorderRadius.circular(9),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.close,
                             size: 12,
                             color: Colors.white,

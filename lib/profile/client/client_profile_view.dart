@@ -11,11 +11,15 @@ import 'widgets/client_reviews_section.dart';
 class ClientProfileView extends StatefulWidget {
   final ClientProfileModel profile;
   final bool showBottomNav;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const ClientProfileView({
     super.key,
     required this.profile,
-    this.showBottomNav= false
+    this.showBottomNav= false,
+    this.isMyProfile = true,
+    this.onMessageTap,
   });
 
   @override
@@ -55,16 +59,18 @@ class _ClientProfileViewState extends State<ClientProfileView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 110),
+          padding: EdgeInsets.fromLTRB(20, 18, 20, 110),
           child: Column(
             children: [
               ClientHeader(
                 profile: profile,
                 onEditTap: openEditPage,
                 onProjectsTap: openProjects,
+                isMyProfile: widget.isMyProfile,
+                onMessageTap: widget.onMessageTap,
               ),
                SizedBox(height: 18),
               ClientAboutSection(profile: profile),

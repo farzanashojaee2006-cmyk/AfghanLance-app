@@ -30,7 +30,7 @@ class FreelancerReviewsSection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 14),
-            const Text(
+            Text(
               "No reviews yet",
               style: TextStyle(color: Colors.grey),
             ),
@@ -55,10 +55,10 @@ class FreelancerReviewsSection extends StatelessWidget {
           ...profile.reviews.map(
                 (review) => Container(
               width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(14),
+              margin: EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: isDark ? Colors.white10 : const Color(0xFFF4FAF9),
+                color: isDark ? Colors.white10 : Color(0xFFF4FAF9),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(

@@ -6,19 +6,19 @@ class SupportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6F8),
+      backgroundColor: Color(0xFFF4F6F8),
 
       appBar: AppBar(
-        title: const Text("Support"),
+        title: Text("Support"),
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            const Text(
+            Text(
               "Need Support?",
               style: TextStyle(
                 fontSize: 24,
@@ -28,7 +28,7 @@ class SupportPage extends StatelessWidget {
 
             SizedBox(height: 10),
 
-            const Text(
+            Text(
               "Our support team is here to help you anytime.",
             ),
 
@@ -67,7 +67,7 @@ class SupportPage extends StatelessWidget {
       String subtitle,
       ) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
@@ -87,7 +87,7 @@ class SupportPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),

@@ -88,12 +88,12 @@ class _SkillChip extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: selected
               ? kThirdColor.withOpacity(isDark ? .20 : .10)
               : isDark
-              ? const Color(0xFF1E1E1E)
+              ? Color(0xFF1E1E1E)
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(

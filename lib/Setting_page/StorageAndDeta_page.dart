@@ -22,12 +22,12 @@ class _StorageDataPageState
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text("Storage & Data"),
+        title: Text("Storage & Data"),
       ),
 
       body: ListView(
 
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
 
         children: [
 
@@ -36,16 +36,16 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.cleaning_services),
+            Icon(Icons.cleaning_services),
 
-            title: const Text("Clear Cache"),
+            title: Text("Clear Cache"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Remove temporary files",
             ),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -66,17 +66,17 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.delete_outline),
+            Icon(Icons.delete_outline),
 
             title:
-            const Text("Clear Downloaded Files"),
+            Text("Clear Downloaded Files"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Delete saved resumes and PDFs",
             ),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -98,14 +98,14 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.data_usage),
+            Icon(Icons.data_usage),
 
-            title: const Text("Data Usage"),
+            title: Text("Data Usage"),
 
             subtitle:
-            const Text("WiFi & Mobile Data"),
+            Text("WiFi & Mobile Data"),
 
-            trailing: const Text("120 MB"),
+            trailing: Text("120 MB"),
           ),
 
           const Divider(),
@@ -113,12 +113,12 @@ class _StorageDataPageState
           SwitchListTile(
 
             secondary:
-            const Icon(Icons.download),
+            Icon(Icons.download),
 
             title:
-            const Text("Auto Download Resume"),
+            Text("Auto Download Resume"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Download files automatically",
             ),
 
@@ -138,12 +138,12 @@ class _StorageDataPageState
           SwitchListTile(
 
             secondary:
-            const Icon(Icons.savings),
+            Icon(Icons.savings),
 
             title:
-            const Text("Save Data Mode"),
+            Text("Save Data Mode"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Reduce internet usage",
             ),
 
@@ -163,12 +163,12 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.storage),
+            Icon(Icons.storage),
 
-            title: const Text("Storage Used"),
+            title: Text("Storage Used"),
 
             subtitle:
-            const Text("Used Storage: 120 MB"),
+            Text("Used Storage: 120 MB"),
           ),
 
           const Divider(),
@@ -176,15 +176,15 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.high_quality),
+            Icon(Icons.high_quality),
 
             title:
-            const Text("Upload Quality"),
+            Text("Upload Quality"),
 
             subtitle: Text(uploadQuality),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -200,15 +200,15 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.backup),
+            Icon(Icons.backup),
 
-            title: const Text("Backup Data"),
+            title: Text("Backup Data"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Save account data",
             ),
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -229,16 +229,16 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.restore),
+            Icon(Icons.restore),
 
-            title: const Text("Restore Data"),
+            title: Text("Restore Data"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Restore saved data",
             ),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 
@@ -259,17 +259,17 @@ class _StorageDataPageState
           ListTile(
 
             leading:
-            const Icon(Icons.delete_forever),
+            Icon(Icons.delete_forever),
 
             title:
-            const Text("Delete Account Data"),
+            Text("Delete Account Data"),
 
-            subtitle: const Text(
+            subtitle: Text(
               "Remove all account information",
             ),
 
             trailing:
-            const Icon(Icons.arrow_forward_ios),
+            Icon(Icons.arrow_forward_ios),
 
             onTap: () {
 

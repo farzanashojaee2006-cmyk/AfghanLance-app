@@ -108,7 +108,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40),
+                            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 40),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.03),
                               borderRadius: BorderRadius.circular(30),
@@ -133,7 +133,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
                                   ).createShader(bounds),
-                                  child: const Text(
+                                  child: Text(
                                     'AfghanLance',
                                     style: TextStyle(
                                       fontSize: 45,
@@ -152,7 +152,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
                                       Container(
                                         height: 1,
                                         width: 100,
-                                        margin: const EdgeInsets.symmetric(vertical: 10),
+                                        margin: EdgeInsets.symmetric(vertical: 10),
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [Colors.transparent, kSecondColor.withOpacity(0.5), Colors.transparent],

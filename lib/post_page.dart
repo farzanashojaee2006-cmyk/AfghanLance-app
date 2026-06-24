@@ -102,7 +102,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
           child: Padding(
 
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
 
             child: Column(
 
@@ -112,9 +112,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                 ListTile(
 
-                  leading: const Icon(Icons.image,color:k4Color),
+                  leading: Icon(Icons.image,color:k4Color),
 
-                  title: const Text('Pick Image',style:TextStyle(color:k4Color)),
+                  title: Text('Pick Image',style:TextStyle(color:k4Color)),
 
                   onTap: () {
 
@@ -127,9 +127,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                 ListTile(
 
-                  leading: const Icon(Icons.video_library,color: k4Color,),
+                  leading: Icon(Icons.video_library,color: k4Color,),
 
-                  title: const Text('Pick Video',style: TextStyle(color: k4Color),),
+                  title: Text('Pick Video',style: TextStyle(color: k4Color),),
 
                   onTap: () {
 
@@ -142,9 +142,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                 ListTile(
 
-                  leading: const Icon(Icons.insert_drive_file,color: k4Color,),
+                  leading: Icon(Icons.insert_drive_file,color: k4Color,),
 
-                  title: const Text('Pick File',style:TextStyle(color: k4Color)),
+                  title: Text('Pick File',style:TextStyle(color: k4Color)),
 
                   onTap: () {
 
@@ -215,7 +215,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
         centerTitle: true,
 
-        title: const Text(
+        title: Text(
 
           'Create a Post',
 
@@ -241,7 +241,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
           onPressed: uploadPost,
 
-          child: const Text(
+          child: Text(
 
             'Post',
 
@@ -254,7 +254,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
         ),],
 
-        leading: const Icon(
+        leading: Icon(
           Icons.arrow_back,
           color: Colors.white,
         ),
@@ -266,7 +266,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         backgroundColor: k4Color,
 
         onPressed: showPickerOptions,
-        child: const Icon(
+        child: Icon(
           Icons.add,
           color: Colors.white,
         ),
@@ -275,7 +275,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
       body: Padding(
 
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
 
         child: Column(
 
@@ -285,7 +285,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
             Container(
 
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12),
 
               height: 250,
               width: double.infinity,

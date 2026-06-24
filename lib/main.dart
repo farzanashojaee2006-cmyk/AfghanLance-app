@@ -40,14 +40,14 @@ class _AfghanLanceState extends State<AfghanLance> {
         brightness: Brightness.light,
         scaffoldBackgroundColor: kFirstColor,
         primaryColor: kThirdColor,
-        colorScheme: const ColorScheme.light(primary: kThirdColor),
+        colorScheme: ColorScheme.light(primary: kThirdColor),
       ),
 
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF121212),
+        scaffoldBackgroundColor: Color(0xFF121212),
         primaryColor: kThirdColor,
-        colorScheme: const ColorScheme.dark(
+        colorScheme: ColorScheme.dark(
           primary: kThirdColor,
           surface: Color(0xFF1E1E1E),
         ),

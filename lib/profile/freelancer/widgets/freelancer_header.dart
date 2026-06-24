@@ -9,24 +9,28 @@ class FreelancerHeader extends StatelessWidget {
   final FreelancerProfileModel profile;
   final VoidCallback onEditTap;
   final VoidCallback onPortfolioTap;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const FreelancerHeader({
     super.key,
     required this.profile,
     required this.onEditTap,
     required this.onPortfolioTap,
+    this.isMyProfile= true,
+    this.onMessageTap
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final cardColor = isDark ? const Color(0xFF1A1A1A) : Colors.white;
+    final cardColor = isDark ? Color(0xFF1A1A1A) : Colors.white;
     final textColor = isDark ? Colors.white : Colors.black;
     final subTextColor = isDark ? Colors.white60 : Colors.black54;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 24),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(30),
@@ -73,6 +77,7 @@ class FreelancerHeader extends StatelessWidget {
                 ),
               ),
 
+              if(isMyProfile)
               Positioned(
                 top: 14,
                 right: 14,
@@ -90,7 +95,7 @@ class FreelancerHeader extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.edit_outlined,
-                      color: isDark? kFirstColor: kThirdColor,
+                      color: isDark ? kFirstColor : kThirdColor,
                       size: 21,
                     ),
                   ),
@@ -180,8 +185,6 @@ class FreelancerHeader extends StatelessWidget {
 
           SizedBox(height: 60),
 
-
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -207,6 +210,25 @@ class FreelancerHeader extends StatelessWidget {
               ),
             ],
           ),
+          if (!isMyProfile) ...[
+            SizedBox(height: 22),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kThirdColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                onPressed: onMessageTap,
+                icon: const Icon(Icons.message_outlined),
+                label: const Text("Message"),
+              ),
+            ),
+          ],
         ],
       ),
     );

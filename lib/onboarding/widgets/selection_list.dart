@@ -33,7 +33,7 @@ class SelectionList extends StatelessWidget {
               color: selected
                   ? kThirdColor.withOpacity(isDark ? .18 : .08)
                   : isDark
-                  ? const Color(0xFF1E1E1E)
+                  ? Color(0xFF1E1E1E)
                   : Colors.white,
               borderRadius: BorderRadius.circular(22),
               border: Border.all(

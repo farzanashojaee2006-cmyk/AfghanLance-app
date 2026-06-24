@@ -30,7 +30,7 @@ InputDecoration kAuthInputDecoration({
       fontSize: 14,
     ),
 
-    errorStyle: const TextStyle(fontSize: 12, height: 1.4),
+    errorStyle: TextStyle(fontSize: 12, height: 1.4),
 
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
@@ -53,7 +53,7 @@ InputDecoration kAuthInputDecoration({
       borderSide: const BorderSide(color: Colors.red),
     ),
 
-    contentPadding: const EdgeInsets.symmetric(
+    contentPadding: EdgeInsets.symmetric(
       horizontal: 12,
       vertical: 18,
     ),

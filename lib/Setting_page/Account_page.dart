@@ -7,11 +7,11 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Account"),
+        title: Text("Account"),
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
 
         child: ListView(
           children: [
@@ -24,41 +24,41 @@ class AccountPage extends StatelessWidget {
             SizedBox(height: 25),
 
             ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text("First Name"),
-              subtitle: const Text("Zainab"),
+              leading: Icon(Icons.person),
+              title: Text("First Name"),
+              subtitle: Text("Zainab"),
             ),
 
             ListTile(
-              leading: const Icon(Icons.person_outline),
-              title: const Text("Last Name"),
-              subtitle: const Text("Mohammadi"),
+              leading: Icon(Icons.person_outline),
+              title: Text("Last Name"),
+              subtitle: Text("Mohammadi"),
             ),
 
             ListTile(
-              leading: const Icon(Icons.email),
-              title: const Text("Email"),
-              subtitle: const Text("zainab@gmail.com"),
+              leading: Icon(Icons.email),
+              title: Text("Email"),
+              subtitle: Text("zainab@gmail.com"),
             ),
 
             ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text("Birth Year"),
-              subtitle: const Text("2003"),
+              leading: Icon(Icons.calendar_month),
+              title: Text("Birth Year"),
+              subtitle: Text("2003"),
             ),
 
             ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text("Bio"),
-              subtitle: const Text(
+              leading: Icon(Icons.info),
+              title: Text("Bio"),
+              subtitle: Text(
                 "Flutter Developer and Job Seeker",
               ),
             ),
 
             ListTile(
-              leading: const Icon(Icons.phone),
-              title: const Text("Change Phone Number"),
-              trailing: const Icon(Icons.arrow_forward_ios),
+              leading: Icon(Icons.phone),
+              title: Text("Change Phone Number"),
+              trailing: Icon(Icons.arrow_forward_ios),
               onTap: () {},
             ),
 
@@ -66,8 +66,8 @@ class AccountPage extends StatelessWidget {
 
             ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.logout),
-              label: const Text("Logout"),
+              icon: Icon(Icons.logout),
+              label: Text("Logout"),
             ),
 
           ],

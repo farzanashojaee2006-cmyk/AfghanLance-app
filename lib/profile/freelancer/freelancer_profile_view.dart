@@ -13,11 +13,15 @@ import 'widgets/freelancer_skills_section.dart';
 class FreelancerProfileView extends StatefulWidget {
   final FreelancerProfileModel profile;
   final bool showBottomNav;
+  final bool isMyProfile;
+  final VoidCallback? onMessageTap;
 
   const FreelancerProfileView({
     super.key,
     required this.profile,
     this.showBottomNav = false,
+    this.isMyProfile = true,
+    this.onMessageTap,
   });
 
   @override
@@ -57,17 +61,19 @@ class _FreelancerProfileViewState extends State<FreelancerProfileView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : kFirstColor,
+      backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 110),
+          padding: EdgeInsets.fromLTRB(20, 18, 20, 110),
           child: Column(
             children: [
-              FreelancerHeader(
-                profile: profile,
-                onEditTap: openEditPage,
-                onPortfolioTap: openPortfolio,
-              ),
+            FreelancerHeader(
+            profile: profile,
+            onEditTap: openEditPage,
+            onPortfolioTap: openPortfolio,
+            isMyProfile: widget.isMyProfile,
+            onMessageTap: widget.onMessageTap,
+          ),
               SizedBox(height: 18),
               FreelancerAboutSection(profile: profile),
               SizedBox(height: 18),

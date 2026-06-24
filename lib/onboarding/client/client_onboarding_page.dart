@@ -403,7 +403,7 @@ class ReviewTile extends StatelessWidget {
       margin:  EdgeInsets.only(bottom: 14),
       padding:  EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        color: isDark ? Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
           color: isDark ? Colors.white10 : Colors.black12,

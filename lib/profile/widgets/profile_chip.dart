@@ -14,9 +14,9 @@ class ProfileChip extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
       decoration: BoxDecoration(
-        color: isDark ? kThirdColor.withOpacity(0.9) : const Color(0xFFE4F1F0),
+        color: isDark ? kThirdColor.withOpacity(0.9) : Color(0xFFE4F1F0),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(

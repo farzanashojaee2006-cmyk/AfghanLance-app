@@ -26,7 +26,7 @@ class SettingsPage extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Color(0XFF006D5F),
 
-        title: const Text("Setting",
+        title: Text("Setting",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
 
 
@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget{
 
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(16, 25, 16, 25),
+            padding: EdgeInsets.fromLTRB(16, 25, 16, 25),
             decoration: const BoxDecoration(
               color:kFirstColor,
               borderRadius: BorderRadius.only(
@@ -64,7 +64,7 @@ class SettingsPage extends StatelessWidget{
                     children:[
                       Text(
                           "Zainab M",
-                          style:const TextStyle(
+                          style:TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -74,12 +74,12 @@ class SettingsPage extends StatelessWidget{
                       ),
                       SizedBox(height: 15),
                       Container(
-                        padding: const EdgeInsets.symmetric (horizontal: 22, vertical: 11),
+                        padding: EdgeInsets.symmetric (horizontal: 22, vertical: 11),
                         decoration: BoxDecoration(
-                          color: const Color(0XFF006D5F),
+                          color: Color(0XFF006D5F),
                           borderRadius: BorderRadius.circular(45),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Be forgiving , Be understand...",
                           style: TextStyle(
                             fontSize: 11,
@@ -104,7 +104,7 @@ class SettingsPage extends StatelessWidget{
                           );
                         },
 
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.qr_code_scanner,
                           color: Color(0XFF006D5F),
                           size: 35,
@@ -119,7 +119,7 @@ class SettingsPage extends StatelessWidget{
                             source:  ImageSource.gallery,
                           );
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.add_circle,
                           color: Color(0XFF006D5F),
                           size: 40,
@@ -140,18 +140,18 @@ class SettingsPage extends StatelessWidget{
           Expanded(
 
             child: Container(
-              margin: const EdgeInsets.all(12),
+              margin: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: kFirstColor,
                 borderRadius: BorderRadius.circular(28),
               ),
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(vertical: 8),
                 children: [
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.person_add,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Account",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.person_add,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Account",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){
@@ -168,9 +168,9 @@ class SettingsPage extends StatelessWidget{
 
 
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.bar_chart,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("privacy",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.bar_chart,color: Color(0XFF006D5F),size: 28),
+                    title: Text("privacy",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -184,9 +184,9 @@ class SettingsPage extends StatelessWidget{
                   ),
 
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.notifications,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Notification",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.notifications,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Notification",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -199,9 +199,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.check_circle,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("My Resume",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.check_circle,color: Color(0XFF006D5F),size: 28),
+                    title: Text("My Resume",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -214,9 +214,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.location_on,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Job Preferences",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.location_on,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Job Preferences",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -230,9 +230,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.chat_bubble,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Saved Jobs",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.chat_bubble,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Saved Jobs",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -248,9 +248,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.person,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Appearance",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.person,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Appearance",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -263,9 +263,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.language,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("App Language",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.language,color: Color(0XFF006D5F),size: 28),
+                    title: Text("App Language",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -278,9 +278,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:const Icon(Icons.settings,color: Color(0XFF006D5F),size: 28),
-                    title: const Text("Storage and Data",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:Icon(Icons.settings,color: Color(0XFF006D5F),size: 28),
+                    title: Text("Storage and Data",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){
