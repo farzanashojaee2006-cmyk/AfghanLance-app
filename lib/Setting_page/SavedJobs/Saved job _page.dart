@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 
+import 'flutter_developer.dart';
+
+
 class SavedJobsPage extends StatelessWidget {
   const SavedJobsPage({super.key});
 
@@ -9,7 +12,7 @@ class SavedJobsPage extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Saved Jobs"),
+        title: const Text("Saved Jobs"),
       ),
       body: ListView(
         children: [
@@ -18,35 +21,36 @@ class SavedJobsPage extends StatelessWidget {
 
             onTap: () {
 
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Job Opened"),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const
+                FlutterDeveloperPage(),
+
                 ),
               );
 
             },
 
             child: Card(
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
 
               child: Padding(
-                padding: EdgeInsets.all(14),
+                padding: const EdgeInsets.all(14),
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Row(
                       mainAxisAlignment:
                       MainAxisAlignment.spaceBetween,
 
                       children: [
 
-                        Text(
+                        const Text(
                           "Flutter Developer",
 
                           style: TextStyle(
@@ -57,7 +61,7 @@ class SavedJobsPage extends StatelessWidget {
 
                         IconButton(
 
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.bookmark,
                             color: Colors.teal,
                           ),
@@ -77,9 +81,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.business),
@@ -90,9 +94,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.location_on,
@@ -104,9 +108,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.attach_money,
@@ -118,9 +122,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.work,
@@ -132,9 +136,9 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.access_time,
@@ -146,7 +150,7 @@ class SavedJobsPage extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Row(
                       children: [
@@ -167,15 +171,15 @@ class SavedJobsPage extends StatelessWidget {
                             },
 
                             child:
-                            Text("Apply Now"),
+                            const Text("Apply Now"),
                           ),
                         ),
 
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
 
                         IconButton(
 
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             color: Colors.red,
                           ),

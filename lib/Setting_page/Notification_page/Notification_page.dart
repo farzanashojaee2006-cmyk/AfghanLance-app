@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget{
@@ -27,15 +26,15 @@ class _NotificationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notification"),
+        title: const Text("Notification"),
       ),
 
       body: ListView(
         children: [
 
           SwitchListTile(
-            secondary: Icon(Icons.work),
-            title: Text("New Job Alerts"),
+            secondary: const Icon(Icons.work),
+            title: const Text("New Job Alerts"),
             value: newJobs,
             onChanged: (value) {
               setState(() {
@@ -45,8 +44,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.description),
-            title: Text("Application Status"),
+            secondary: const Icon(Icons.description),
+            title: const Text("Application Status"),
             value: applicationStatus,
             onChanged: (value) {
               setState(() {
@@ -56,8 +55,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.message),
-            title: Text("Messages"),
+            secondary: const Icon(Icons.message),
+            title: const Text("Messages"),
 
             value: messages,
             onChanged: (value) {
@@ -68,8 +67,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.video_call),
-            title: Text("Interview Invites"),
+            secondary: const Icon(Icons.video_call),
+            title: const Text("Interview Invites"),
             value: interviewInvites,
             onChanged: (value) {
               setState(() {
@@ -79,8 +78,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.bookmark),
-            title: Text("Saved Jobs Alerts"),
+            secondary: const Icon(Icons.bookmark),
+            title: const Text("Saved Jobs Alerts"),
             value: savedJobsAlerts,
             onChanged: (value) {
               setState(() {
@@ -90,8 +89,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.remove_red_eye),
-            title: Text("Profile Views"),
+            secondary: const Icon(Icons.remove_red_eye),
+            title: const Text("Profile Views"),
             value: profileViews,
             onChanged: (value) {
               setState(() {
@@ -101,8 +100,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.recommend),
-            title: Text("Job Recommendations"),
+            secondary: const Icon(Icons.recommend),
+            title: const Text("Job Recommendations"),
             value: jobRecommendations,
             onChanged: (value) {
               setState(() {
@@ -112,8 +111,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.security),
-            title: Text("Account Updates"),
+            secondary: const Icon(Icons.security),
+            title: const Text("Account Updates"),
             value: accountUpdates,
             onChanged: (value) {
               setState(() {
@@ -123,8 +122,8 @@ class _NotificationScreenState
           ),
 
           SwitchListTile(
-            secondary: Icon(Icons.email),
-            title: Text("Marketing Emails"),
+            secondary: const Icon(Icons.email),
+            title: const Text("Marketing Emails"),
             value: marketingEmails,
             onChanged: (value) {
               setState(() {
