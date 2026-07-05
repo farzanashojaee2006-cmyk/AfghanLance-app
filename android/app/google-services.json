@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "531463712974-7cvo734ts006tmpft1akcq016kt7341f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.afghanlance",
+            "certificate_hash": "7db6e671e6bf2c9df7eedd83bb0fb5da4e6aed2f"
+          }
+        },
+        {
           "client_id": "531463712974-5p60s70cjtl0r891vv3057ut6ueg53l1.apps.googleusercontent.com",
           "client_type": 3
         }
