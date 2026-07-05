@@ -49,7 +49,7 @@ dependencies:
   cached_network_image: ^3.4.1
   connectivity_plus: ^7.1.1
   country_picker: ^2.0.27
-
+  url_launcher: ^6.3.2
 
 
 
