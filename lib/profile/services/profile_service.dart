@@ -4,7 +4,7 @@ import '../models/freelancer_profile_model.dart';
 class ProfileService {
   static FreelancerProfileModel getFreelancerProfile() {
     return const FreelancerProfileModel(
-      id: "freelancer_001",
+      id: "",
       name: "",
       title: "",
       location: "",
@@ -25,7 +25,7 @@ class ProfileService {
 
   static ClientProfileModel getClientProfile() {
     return const ClientProfileModel(
-      id: "client_001",
+      id: "",
       companyName: "",
       ownerName: "",
       location: "",

@@ -8,16 +8,12 @@ import 'package:flutter/material.dart';
 import 'onboarding/client/client_onboarding_page.dart';
 import 'onboarding/freelancer/freelancer_onboarding_page.dart';
 
-
 enum SignupMethod { email, phone }
 
 class SignUpScreen extends StatefulWidget {
   final bool isClient;
 
-  const SignUpScreen({
-    super.key,
-    required this.isClient,
-  });
+  const SignUpScreen({super.key, required this.isClient});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -26,7 +22,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   SignupMethod signupMethod = SignupMethod.email;
   final AuthService _authService = AuthService();
-
+  bool isLoading = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -91,13 +87,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         isDark: isDark,
         suffixIcon: isPassword
             ? IconButton(
-          onPressed: togglePassword,
-          icon: Icon(
-            obscureText
-                ? Icons.visibility_off
-                : Icons.visibility,
-          ),
-        )
+                onPressed: togglePassword,
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
             : null,
       ),
     );
@@ -246,14 +240,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
 
                       return null;
-                    },                  ),
+                    },
+                  ),
 
                   SizedBox(height: 15),
 
                   TextFormField(
                     readOnly: true,
                     controller: countryController,
-                    autovalidateMode: AutovalidateMode.disabled,validator: (value) {
+                    autovalidateMode: AutovalidateMode.disabled,
+                    validator: (value) {
                       if (selectedCountry == "Select Country") {
                         return "Select your country";
                       }
@@ -269,9 +265,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       isDark: isDark,
                       suffixIcon: Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: isDark
-                            ? Colors.white70
-                            : Colors.grey,
+                        color: isDark ? Colors.white70 : Colors.grey,
                       ),
                     ),
                   ),
@@ -367,8 +361,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
 
                       try {
-                        final username =
-                        usernameController.text.trim().toLowerCase();
+                        final username = usernameController.text
+                            .trim()
+                            .toLowerCase();
 
                         final usernameQuery = await FirebaseFirestore.instance
                             .collection('users')
@@ -379,9 +374,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (usernameQuery.docs.isNotEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text(
-                                "This username is already taken.",
-                              ),
+                              content: Text("This username is already taken."),
                             ),
                           );
                           return;
@@ -395,29 +388,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         final user = userCredential.user;
 
                         if (user == null) {
-                          throw FirebaseAuthException(
-                            code: "user-not-created",
-                          );
+                          throw FirebaseAuthException(code: "user-not-created");
                         }
 
                         await FirebaseFirestore.instance
                             .collection('users')
                             .doc(user.uid)
                             .set({
-                          'uid': user.uid,
-                          'firstName': firstNameController.text.trim(),
-                          'lastName': lastNameController.text.trim(),
-                          'email': emailController.text.trim(),
-                          'username': username,
-                          'country': countryController.text.trim(),
-                          'role': widget.isClient
-                              ? 'client'
-                              : 'freelancer',
-                          'profileImage': 'assets/images/profile.png',
-                          'isVerified': false,
-                          'isProfileCompleted': false,
-                          'createdAt': FieldValue.serverTimestamp(),
-                        });
+                              'uid': user.uid,
+                              'firstName': firstNameController.text.trim(),
+                              'lastName': lastNameController.text.trim(),
+                              'email': emailController.text.trim(),
+                              'username': username,
+                              'country': countryController.text.trim(),
+                              'role': widget.isClient ? 'client' : 'freelancer',
+                              'profileImage': 'assets/images/profile.png',
+                              'isVerified': false,
+                              'isProfileCompleted': false,
+                              'createdAt': FieldValue.serverTimestamp(),
+                            });
 
                         if (!mounted) return;
 
@@ -425,31 +414,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (_) => widget.isClient
-                                ?  ClientOnboardingPage()
-                                :  FreelancerOnboardingPage(),
+                                ? ClientOnboardingPage()
+                                : FreelancerOnboardingPage(),
                           ),
                         );
                       } on FirebaseAuthException catch (e) {
                         String message = "Registration failed";
 
                         if (e.code == 'email-already-in-use') {
-                          message =
-                          "This email is already registered.";
+                          message = "This email is already registered.";
                         } else if (e.code == 'invalid-email') {
                           message = "Invalid email address.";
                         } else if (e.code == 'weak-password') {
                           message = "Password is too weak.";
                         }
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(message)),
-                        );
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(message)));
                       } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(e.toString())),
-                        );
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(e.toString())));
                       }
-                    },                    child: Text(
+                    },
+                    child: Text(
                       "Sign Up",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
@@ -484,24 +473,116 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: 20),
 
                   Center(
-                    child: Container(
-                      width: 250,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white54,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.grey.shade300),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.g_mobiledata, color: kThirdColor),
-                          SizedBox(width: 8),
-                          Text(
-                            "Continue with Google",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
+                    child: GestureDetector(
+                      onTap: () async {
+                        try {
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          final userCredential = await _authService
+                              .signInWithGoogle();
+
+                          if (userCredential == null) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            return;
+                          }
+
+                          final user = userCredential.user;
+
+                          if (user == null) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            return;
+                          }
+
+                          final userDoc = FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(user.uid);
+
+                          final docSnapshot = await userDoc.get();
+
+                          String username = user.email?.split('@')[0] ?? '';
+
+                          final usernameQuery = await FirebaseFirestore.instance
+                              .collection('users')
+                              .where('username', isEqualTo: username)
+                              .get();
+
+                          if (usernameQuery.docs.isNotEmpty) {
+                            username =
+                                "${username}_${user.uid.substring(0, 4)}";
+                          }
+
+                          if (!docSnapshot.exists) {
+                            await userDoc.set({
+                              'uid': user.uid,
+                              'firstName': user.displayName ?? '',
+                              'lastName': '',
+                              'email': user.email ?? '',
+                              'username': username,
+                              'country': '',
+                              'role': widget.isClient ? 'client' : 'freelancer',
+                              'profileImage': user.photoURL ?? '',
+                              'isVerified': false,
+                              'isProfileCompleted': false,
+                              'createdAt': FieldValue.serverTimestamp(),
+                            });
+                          }
+
+                          if (!mounted) return;
+
+                          setState(() {
+                            isLoading = false;
+                          });
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => widget.isClient
+                                  ? ClientOnboardingPage()
+                                  : FreelancerOnboardingPage(),
+                            ),
+                          );
+                        } catch (e) {
+                          setState(() {
+                            isLoading = false;
+                          });
+
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                        }
+                      },
+                      child: Container(
+                        width: 250,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Center(
+                          child: isLoading
+                              ? const CircularProgressIndicator()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.g_mobiledata,
+                                      color: kThirdColor,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    const Text(
+                                      "Continue with Google",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                        ),
                       ),
                     ),
                   ),
