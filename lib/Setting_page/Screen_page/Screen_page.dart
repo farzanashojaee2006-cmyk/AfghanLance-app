@@ -1,19 +1,16 @@
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../Account_page/Account.dart';
+import '../Appearance_page/Appearance.dart';
+import '../JobPrefernce_page/Job_Perferences.dart';
+import '../MyResume/MyResume.dart';
+import '../Notification_page/Notification_page.dart';
+import '../Praivacy_page/Praivacy.dart';
+import '../SavedJobs/Saved job _page.dart';
+import '../Storage_and_Data/Storage_&_Data.dart';
 
-import '../constants.dart';
-import 'Account_page.dart';
-import 'Appearance_page.dart';
-import 'JobPrefirences_page.dart';
-import 'MyResume_page.dart';
-import 'Notification_age.dart';
-
-import 'Privacy_age.dart';
-import 'SavedJobs_page.dart';
-import 'StorageAndDeta_page.dart';
 
 
 class SettingsPage extends StatelessWidget{
@@ -22,11 +19,11 @@ class SettingsPage extends StatelessWidget{
   @override
   Widget build (BuildContext context){
     return Scaffold(
-      backgroundColor:kFirstColor,
+      backgroundColor: Color(0XFF9ED9D2),
       appBar: AppBar(
         backgroundColor: Color(0XFF006D5F),
 
-        title: Text("Setting",
+        title: const Text("Setting",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
 
 
@@ -37,9 +34,9 @@ class SettingsPage extends StatelessWidget{
 
           Container(
             width: double.infinity,
-            padding: EdgeInsets.fromLTRB(16, 25, 16, 25),
+            padding: const EdgeInsets.fromLTRB(16, 25, 16, 25),
             decoration: const BoxDecoration(
-              color:kFirstColor,
+              color: Color(0XFF9ED9D2),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -54,7 +51,7 @@ class SettingsPage extends StatelessWidget{
                   backgroundImage: const AssetImage('assets/profile.jpg'),
 
                 ),
-                SizedBox(width: 14),
+                const SizedBox(width: 14),
 
 
                 Expanded(
@@ -64,7 +61,7 @@ class SettingsPage extends StatelessWidget{
                     children:[
                       Text(
                           "Zainab M",
-                          style:TextStyle(
+                          style:const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -72,14 +69,14 @@ class SettingsPage extends StatelessWidget{
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Container(
-                        padding: EdgeInsets.symmetric (horizontal: 22, vertical: 11),
+                        padding: const EdgeInsets.symmetric (horizontal: 22, vertical: 11),
                         decoration: BoxDecoration(
-                          color: Color(0XFF006D5F),
+                          color: const Color(0XFF006D5F),
                           borderRadius: BorderRadius.circular(45),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Be forgiving , Be understand...",
                           style: TextStyle(
                             fontSize: 11,
@@ -104,7 +101,7 @@ class SettingsPage extends StatelessWidget{
                           );
                         },
 
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.qr_code_scanner,
                           color: Color(0XFF006D5F),
                           size: 35,
@@ -119,7 +116,7 @@ class SettingsPage extends StatelessWidget{
                             source:  ImageSource.gallery,
                           );
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add_circle,
                           color: Color(0XFF006D5F),
                           size: 40,
@@ -140,18 +137,18 @@ class SettingsPage extends StatelessWidget{
           Expanded(
 
             child: Container(
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: kFirstColor,
+                color: const Color(0XFF9ED9D2),
                 borderRadius: BorderRadius.circular(28),
               ),
               child: ListView(
-                padding: EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.person_add,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Account",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.person_add,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Account",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){
@@ -168,9 +165,9 @@ class SettingsPage extends StatelessWidget{
 
 
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.bar_chart,color: Color(0XFF006D5F),size: 28),
-                    title: Text("privacy",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.bar_chart,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("privacy",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -184,9 +181,9 @@ class SettingsPage extends StatelessWidget{
                   ),
 
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.notifications,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Notification",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.notifications,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Notification",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -199,9 +196,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.check_circle,color: Color(0XFF006D5F),size: 28),
-                    title: Text("My Resume",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.check_circle,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("My Resume",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -214,9 +211,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.location_on,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Job Preferences",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.location_on,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Job Preferences",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -230,9 +227,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.chat_bubble,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Saved Jobs",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.chat_bubble,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Saved Jobs",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -248,9 +245,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.person,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Appearance",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.person,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Appearance",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -263,9 +260,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.language,color: Color(0XFF006D5F),size: 28),
-                    title: Text("App Language",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.language,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("App Language",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){Navigator.push(
@@ -278,9 +275,9 @@ class SettingsPage extends StatelessWidget{
 
                   ),
                   ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
-                    leading:Icon(Icons.settings,color: Color(0XFF006D5F),size: 28),
-                    title: Text("Storage and Data",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+                    leading:const Icon(Icons.settings,color: Color(0XFF006D5F),size: 28),
+                    title: const Text("Storage and Data",
                         style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,color: Colors.white)),
                     trailing: Icon(Icons.chevron_left, color: Colors.white,size: 26),
                     onTap:(){
@@ -305,6 +302,10 @@ class SettingsPage extends StatelessWidget{
   }
 
 }
+
+
+
+
 
 
 

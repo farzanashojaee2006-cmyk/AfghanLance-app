@@ -1,5 +1,7 @@
-import 'package:afghanlance/Setting_page/Setting_Screen.dart';
+
 import 'package:afghanlance/SkillCard.dart';
+import 'package:afghanlance/help&Support_Page.dart';
+import 'package:afghanlance/help_center/screens/help_center.dart';
 import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
@@ -10,6 +12,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/messenger/pages/chat_list_page.dart';
+
+import 'Setting_page/Screen_page/Screen_page.dart';
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -150,7 +154,7 @@ class _HomeScreenState extends State<HomePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HelpPage()),
+                    MaterialPageRoute(builder: (context) => HelpCenterScreen()),
                   );
                 },
                 child: Text(
