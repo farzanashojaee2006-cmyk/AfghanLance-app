@@ -294,29 +294,79 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // SOCIAL
                   Center(
-                    child: Container(
-                      width: 250,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white54,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.grey.shade300),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.g_mobiledata, color: kThirdColor),
-                          SizedBox(width: 8),
-                          Text(
-                            "Continue with Google",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
+                    child: GestureDetector(
+                      onTap: () async {
+                        try {
+                          final userCredential =
+                          await _authService.signInWithGoogle();
+
+                          if (userCredential == null) return;
+
+                          final user = userCredential.user;
+                          if (user == null) return;
+
+                          final doc = await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(user.uid)
+                              .get();
+
+                          if (!doc.exists) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "No account found. Please sign up first.",
+                                ),
+                              ),
+                            );
+
+                            await FirebaseAuth.instance.signOut();
+                            return;
+                          }
+
+                          final data = doc.data()!;
+
+                          final isClient = data['role'] == 'client';
+
+                          if (!mounted) return;
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => HomePage(
+                                isClient: isClient,
+                              ),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(e.toString()),
+                            ),
+                          );
+                        }
+                      },
+                      child: Container(
+                        width: 250,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.g_mobiledata, color: kThirdColor),
+                            SizedBox(width: 8),
+                            Text(
+                              "Continue with Google",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 25),
+                  ),                  SizedBox(height: 25),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

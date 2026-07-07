@@ -6,7 +6,6 @@ import '../models/message_model.dart';
 import '../services/chat_service.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/message_input.dart';
-import '../widgets/message_status_widget.dart';
 
 class ChatPage extends StatefulWidget {
   final String userName;
@@ -34,10 +33,7 @@ class _ChatPageState extends State<ChatPage> {
     final text = _controller.text.trim();
     _controller.clear();
 
-    await _chatService.sendMessage(
-      otherUserId: widget.otherUserId,
-      text: text,
-    );
+    await _chatService.sendMessage(otherUserId: widget.otherUserId, text: text);
   }
 
   @override
@@ -66,10 +62,8 @@ class _ChatPageState extends State<ChatPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (_) => ProfilePage(
-                    userId: widget.otherUserId,
-                    isClient: false,
-                  )
+                builder: (_) =>
+                    ProfilePage(userId: widget.otherUserId, isClient: false),
               ),
             );
           },
@@ -128,21 +122,19 @@ class _ChatPageState extends State<ChatPage> {
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(
-                    child: Text("No messages yet"),
-                  );
+                  return const Center(child: Text("No messages yet"));
                 }
 
                 final docs = snapshot.data!.docs;
 
                 return ListView.builder(
+                  reverse: true,
                   padding: const EdgeInsets.all(16),
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     final data = docs[index].data() as Map<String, dynamic>;
 
-                    final isMe =
-                        data['senderId'] == _chatService.currentUserId;
+                    final isMe = data['senderId'] == _chatService.currentUserId;
 
                     final timestamp = data['createdAt'] as Timestamp?;
                     final time = timestamp == null
@@ -156,7 +148,6 @@ class _ChatPageState extends State<ChatPage> {
                         time: time,
                         isMe: isMe,
                         senderId: data['senderId'] ?? '',
-                        status: MessageStatus.sent,
                       ),
                     );
                   },
