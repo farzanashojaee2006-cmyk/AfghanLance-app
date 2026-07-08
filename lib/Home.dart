@@ -1,6 +1,5 @@
 
 import 'package:afghanlance/SkillCard.dart';
-import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
@@ -10,8 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/messenger/pages/chat_list_page.dart';
-
 import 'Setting_page/Screen_page/Screen_page.dart';
+import 'help_center/screens/help_center.dart';
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -152,7 +151,7 @@ class _HomeScreenState extends State<HomePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HelpPage()),
+                    MaterialPageRoute(builder: (context) => HelpCenterScreen()),
                   );
                 },
                 child: Text(
@@ -162,7 +161,7 @@ class _HomeScreenState extends State<HomePage> {
                 ),
               ),
 
-              onTap: () {},
+
             ),
 
             ListTile(
@@ -598,6 +597,79 @@ class _CommonView extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('posts')
+                .snapshots(),
+
+            builder: (context, snapshot) {
+
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+
+              if(!snapshot.hasData){
+                return Center(
+                  child: Text('No Data'),
+                );
+              }
+
+
+              return ListView.builder(
+
+                shrinkWrap: true,
+
+                physics: NeverScrollableScrollPhysics(),
+
+                itemCount: snapshot.data!.docs.length,
+
+                itemBuilder: (context,index){
+
+                  var post = snapshot.data!.docs[index];
+
+                  return Card(
+
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                        children: [
+
+                          Text(
+                            post['username'] ?? 'User',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          SizedBox(height:10),
+
+                          Text(
+                            post['caption'] ?? '',
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  );
+
+                },
+
+              );
+
+            },
+
           ),
 
           SizedBox(height: 25),

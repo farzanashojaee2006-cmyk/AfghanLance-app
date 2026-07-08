@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'constants.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -171,30 +172,65 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 
 
-  void uploadPost() {
+  Future<void> uploadPost() async {
 
-    if (postController.text.trim().isEmpty &&
-        selectedFile == null) {
-
+    if (postController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-
-        const SnackBar(
-          content: Text('Write something or pick a file'),
-        ),
-
+        const SnackBar(content: Text('Write something')),
       );
-
       return;
-
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
+    try {
 
-      const SnackBar(
-        content: Text('Post Uploaded Successfully'),
-      ),
+      final user = FirebaseAuth.instance.currentUser;
 
-    );
+      if (user == null) return;
+
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+
+      final data = userDoc.data();
+
+
+      await FirebaseFirestore.instance.collection('posts').add({
+
+        'caption': postController.text.trim(),
+
+        'likes': 0,
+
+        'likedBy': [],
+
+        'type': 'text',
+
+        'username':
+        "${data?['firstName'] ?? ''} ${data?['lastName'] ?? ''}",
+
+        'userId': user.uid,
+
+        'createdAt': Timestamp.now(),
+
+      });
+
+
+      postController.clear();
+
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Post uploaded successfully'),
+        ),
+      );
+
+
+    } catch(e){
+
+      print(e.toString());
+
+    }
 
   }
 
