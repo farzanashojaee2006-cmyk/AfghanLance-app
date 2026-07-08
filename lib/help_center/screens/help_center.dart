@@ -1,10 +1,11 @@
+import 'package:afghanlance/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import '../models/faq_model.dart';
 
 import 'contact_support.dart';
-import 'live_chat.dart';
+
 
 class HelpCenterScreen extends StatefulWidget {
   const HelpCenterScreen({super.key});
@@ -86,9 +87,12 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kFirstColor,
       appBar: AppBar(title: const Text('Help Center'), centerTitle: true),
 
-      body: ListView(
+      body:
+
+      ListView(
         padding: const EdgeInsets.all(16),
         children: [
 

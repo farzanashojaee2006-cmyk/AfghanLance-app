@@ -1,3 +1,4 @@
+import 'package:afghanlance/constants.dart';
 import 'package:flutter/material.dart';
 
 class ContactSupportScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _ContactSupportScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: kFirstColor,
       appBar: AppBar(
         title: const Text('Contact Support'),
       ),
