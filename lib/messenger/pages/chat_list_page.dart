@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../models/chat_model.dart';
 import '../services/chat_service.dart';
-import '../widgets/chat_tile.dart';
 import 'chat_page.dart';
-import 'new_message_page.dart';
+import 'global_chat_page.dart';
 
 class ChatListPage extends StatelessWidget {
   ChatListPage({super.key});
@@ -85,108 +83,180 @@ class ChatListPage extends StatelessWidget {
                     }
 
                     if (snapshot.hasError) {
-                      debugPrint(snapshot.error.toString());
-
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text(
-                            snapshot.error.toString(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: isDark ? Colors.white70 : Colors.black54,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-
-                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                       return Center(
                         child: Text(
-                          'No chats yet',
-                          style: TextStyle(
-                            color: isDark ? Colors.white70 : Colors.black54,
-                          ),
+                          snapshot.error.toString(),
+                          style: const TextStyle(color: Colors.red),
                         ),
                       );
                     }
 
-                    final chats = snapshot.data!.docs;
+                    final chats = snapshot.data?.docs ?? [];
 
-                    return ListView.builder(
-                      itemCount: chats.length,
-                      itemBuilder: (context, index) {
-                        final chatData =
-                            chats[index].data() as Map<String, dynamic>;
+                    return ListView(
+                      children: [
+                        Card(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: ListTile(
+                            leading: const CircleAvatar(
+                              backgroundColor: kThirdColor,
+                              child: Icon(Icons.public, color: Colors.white),
+                            ),
+                            title: const Text(
+                              'Global Chat',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: const Text('Chat with everyone'),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const GlobalChatPage(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
 
-                        final participants = List<String>.from(
-                          chatData['participants'] ?? [],
-                        );
+                        if (chats.isEmpty)
+                          const Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Center(child: Text('No private chats yet')),
+                          ),
 
-                        final otherUserId = participants.firstWhere(
-                          (id) => id != _chatService.currentUserId,
-                          orElse: () => '',
-                        );
+                        ...List.generate(chats.length, (index) {
+                          final chatData =
+                              chats[index].data() as Map<String, dynamic>;
 
-                        if (otherUserId.isEmpty) {
-                          return SizedBox.shrink();
-                        }
+                          final participants = List<String>.from(
+                            chatData['participants'] ?? [],
+                          );
 
-                        return FutureBuilder<DocumentSnapshot>(
-                          future: FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(otherUserId)
-                              .get(),
-                          builder: (context, userSnapshot) {
-                            if (!userSnapshot.hasData) {
-                              return SizedBox.shrink();
-                            }
+                          final otherUserId = participants.firstWhere(
+                            (id) => id != _chatService.currentUserId,
+                            orElse: () => '',
+                          );
 
-                            if (!userSnapshot.data!.exists) {
-                              return SizedBox.shrink();
-                            }
+                          if (otherUserId.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
 
-                            final userData =
-                                userSnapshot.data!.data()
-                                    as Map<String, dynamic>;
+                          return FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(otherUserId)
+                                .get(),
+                            builder: (context, userSnapshot) {
+                              if (!userSnapshot.hasData ||
+                                  !userSnapshot.data!.exists) {
+                                return const SizedBox.shrink();
+                              }
 
-                            final name =
-                                '${userData['firstName'] ?? ''} ${userData['lastName'] ?? ''}'
-                                    .trim();
+                              final userData =
+                                  userSnapshot.data!.data()
+                                      as Map<String, dynamic>;
 
-                            final time = formatTime(
-                              chatData['lastMessageTime'] as Timestamp?,
-                            );
+                              final name =
+                                  '${userData['firstName'] ?? ''} '
+                                          '${userData['lastName'] ?? ''}'
+                                      .trim();
 
-                            return ChatTile(
-                              chat: ChatModel(
-                                id: otherUserId,
-                                name: name.isEmpty ? 'User' : name,
-                                role: userData['role'] ?? '',
-                                lastMessage: chatData['lastMessage'] ?? '',
-                                time: time,
-                                avatar: userData['profileImage'] ?? '',
-                                isOnline: false,
-                                unreadCount: 0,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ChatPage(
-                                      userName: name.isEmpty ? 'User' : name,
-                                      isOnline: false,
-                                      otherUserId: otherUserId,
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? const Color(0xFF1B1B1B)
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(18),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.05),
+                                      blurRadius: 10,
+                                    ),
+                                  ],
+                                ),
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 14,
+                                    vertical: 8,
+                                  ),
+
+                                  leading: CircleAvatar(
+                                    radius: 26,
+                                    backgroundColor: kThirdColor,
+                                    child: Text(
+                                      name.isNotEmpty
+                                          ? name[0].toUpperCase()
+                                          : 'U',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          },
-                        );
-                      },
+
+                                  title: Text(
+                                    name.isEmpty ? 'User' : name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      chatData['lastMessage'] ?? '',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: isDark
+                                            ? Colors.white60
+                                            : Colors.black54,
+                                      ),
+                                    ),
+                                  ),
+
+                                  trailing: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ChatPage(
+                                          userName: name.isEmpty
+                                              ? 'User'
+                                              : name,
+                                          isOnline: false,
+                                          otherUserId: otherUserId,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }),
+                      ],
                     );
                   },
                 ),

@@ -20,12 +20,13 @@ class ChatService {
         .orderBy('lastMessageTime', descending: true)
         .snapshots();
   }
+
   Stream<QuerySnapshot> getMessages(String chatId) {
     return _firestore
         .collection('chats')
         .doc(chatId)
         .collection('messages')
-        .orderBy('createdAt', descending: false)
+        .orderBy('createdAt', descending: true)
         .snapshots();
   }
 
@@ -60,6 +61,33 @@ class ChatService {
       'status': 'sent',
       'isDeleted': false,
       'isEdited': false,
+    });
+  }
+
+  Stream<QuerySnapshot> getBroadcastMessages() {
+    return _firestore
+        .collection('broadcast_messages')
+        .orderBy('date', descending: true)
+        .snapshots();
+  }
+
+  Future<void> sendBroadcastMessage(String text) async {
+    if (text.trim().isEmpty) return;
+
+    final userDoc = await _firestore
+        .collection('users')
+        .doc(currentUserId)
+        .get();
+
+    final userData = userDoc.data();
+
+    await _firestore.collection('broadcast_messages').add({
+      'senderId': currentUserId,
+      'senderName':
+          '${userData?['firstName'] ?? ''} ${userData?['lastName'] ?? ''}'
+              .trim(),
+      'text': text.trim(),
+      'date': FieldValue.serverTimestamp(),
     });
   }
 }

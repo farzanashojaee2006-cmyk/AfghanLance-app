@@ -647,7 +647,7 @@ class _CommonView extends StatelessWidget {
                         children: [
 
                           Text(
-                            post['username'] ?? 'User',
+                            (post.data() as Map<String, dynamic>)['username'] ?? 'username',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -656,9 +656,8 @@ class _CommonView extends StatelessWidget {
                           SizedBox(height:10),
 
                           Text(
-                            post['caption'] ?? '',
+                            (post.data() as Map<String, dynamic>)['caption'] ?? '',
                           ),
-
                         ],
                       ),
                     ),

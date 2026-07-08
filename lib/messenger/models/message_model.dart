@@ -1,14 +1,13 @@
 import '../widgets/message_status_widget.dart';
 
-enum MessageType { text, file, voice }
-
 class MessageModel {
   final String id;
   final String text;
   final String time;
   final bool isMe;
   final String senderId;
-  final MessageType type;
+  final String senderName;
+  final String senderPhoto;
   final MessageStatus status;
   final DateTime? createdAt;
   final bool isEdited;
@@ -20,11 +19,11 @@ class MessageModel {
     required this.time,
     required this.isMe,
     required this.senderId,
-    this.type = MessageType.text,
+    this.senderName = '',
+    this.senderPhoto = '',
     this.status = MessageStatus.sent,
     this.createdAt,
     this.isEdited = false,
     this.isDeleted = false,
-
   });
 }
