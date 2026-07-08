@@ -50,9 +50,8 @@ class AuthGate extends StatelessWidget {
             onToggleTheme: onToggleTheme,
           );
         }
-
         return HomePage(
-          isClient: isClient,
+          isClient: isClient ?? false,
         );
       },
     );

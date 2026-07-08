@@ -1,26 +1,37 @@
-
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'constants.dart';
+import 'package:afghanlance/services/firebase_notification_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class CreatePostScreen extends StatefulWidget {
+
   const CreatePostScreen({super.key});
+
 
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
+
 }
 
+
+
 class _CreatePostScreenState extends State<CreatePostScreen> {
+
 
   final TextEditingController postController =
   TextEditingController();
 
+
   File? selectedFile;
 
+
   String postType = '';
+
 
   final ImagePicker picker = ImagePicker();
 
@@ -32,11 +43,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       source: ImageSource.gallery,
     );
 
+
     if (image != null) {
 
       setState(() {
 
         selectedFile = File(image.path);
+
         postType = 'image';
 
       });
@@ -47,17 +60,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 
 
+
   Future<void> pickVideo() async {
 
     final XFile? video = await picker.pickVideo(
       source: ImageSource.gallery,
     );
 
+
     if (video != null) {
 
       setState(() {
 
         selectedFile = File(video.path);
+
         postType = 'video';
 
       });
@@ -68,10 +84,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 
 
+
   Future<void> pickFile() async {
 
     FilePickerResult? result =
     await FilePicker.platform.pickFiles();
+
 
     if (result != null) {
 
@@ -90,7 +108,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 
 
+
   void showPickerOptions() {
+
 
     showModalBottomSheet(
 
@@ -98,66 +118,79 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
       builder: (context) {
 
+
         return SafeArea(
 
-          child: Padding(
+          child: Column(
 
-            padding: EdgeInsets.all(20),
+            mainAxisSize: MainAxisSize.min,
 
-            child: Column(
+            children: [
 
-              mainAxisSize: MainAxisSize.min,
 
-              children: [
+              ListTile(
 
-                ListTile(
+                leading: Icon(Icons.image,color:k4Color),
 
-                  leading: Icon(Icons.image,color:k4Color),
-
-                  title: Text('Pick Image',style:TextStyle(color:k4Color)),
-
-                  onTap: () {
-
-                    Navigator.pop(context);
-                    pickImage();
-
-                  },
-
+                title: Text(
+                  "Pick Image",
+                  style: TextStyle(color:k4Color),
                 ),
 
-                ListTile(
+                onTap: () {
 
-                  leading: Icon(Icons.video_library,color: k4Color,),
+                  Navigator.pop(context);
 
-                  title: Text('Pick Video',style: TextStyle(color: k4Color),),
+                  pickImage();
 
-                  onTap: () {
+                },
 
-                    Navigator.pop(context);
-                    pickVideo();
+              ),
 
-                  },
 
+
+              ListTile(
+
+                leading: Icon(Icons.video_library,color:k4Color),
+
+                title: Text(
+                  "Pick Video",
+                  style: TextStyle(color:k4Color),
                 ),
 
-                ListTile(
+                onTap: () {
 
-                  leading: Icon(Icons.insert_drive_file,color: k4Color,),
+                  Navigator.pop(context);
 
-                  title: Text('Pick File',style:TextStyle(color: k4Color)),
+                  pickVideo();
 
-                  onTap: () {
+                },
 
-                    Navigator.pop(context);
-                    pickFile();
+              ),
 
-                  },
 
+
+              ListTile(
+
+                leading: Icon(Icons.insert_drive_file,color:k4Color),
+
+                title: Text(
+                  "Pick File",
+                  style: TextStyle(color:k4Color),
                 ),
 
-              ],
+                onTap: () {
 
-            ),
+                  Navigator.pop(context);
+
+                  pickFile();
+
+                },
+
+              ),
+
+
+            ],
 
           ),
 
@@ -167,45 +200,88 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
     );
 
+
   }
 
 
 
-  void uploadPost() {
 
-    if (postController.text.trim().isEmpty &&
-        selectedFile == null) {
+  Future<void> uploadPost() async {
+
+
+    if(postController.text.trim().isEmpty &&
+        selectedFile == null){
+
 
       ScaffoldMessenger.of(context).showSnackBar(
 
         const SnackBar(
-          content: Text('Write something or pick a file'),
+          content: Text(
+              "Write something or pick a file"
+          ),
         ),
 
       );
+
 
       return;
 
     }
 
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return;
+    }
+
+
+    await FirebaseFirestore.instance
+        .collection('posts')
+        .add({
+
+      'userId': user.uid,
+
+      'text': postController.text.trim(),
+
+      'type': postType,
+
+      'createdAt': Timestamp.now(),
+
+    });
+    print("UPLOAD FUNCTION STARTED");
+
+    await FirebaseNotificationService.addNotification(
+
+      "New Post",
+
+      "A new project has been added",
+
+    );
+    print("CALLING FIREBASE NOTIFICATION");
+
+
+
     ScaffoldMessenger.of(context).showSnackBar(
 
       const SnackBar(
-        content: Text('Post Uploaded Successfully'),
+
+        content: Text(
+            "Post Uploaded Successfully"
+        ),
+
       ),
 
     );
 
+
   }
-
-
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
 
       backgroundColor: kFirstColor,
+
 
       appBar: AppBar(
 
@@ -215,80 +291,123 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
         centerTitle: true,
 
-        title: Text(
 
-          'Create a Post',
-
+        title: const Text(
+          "Create a Post",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
-
         ),
-        actions: [ElevatedButton(
 
-          style: ElevatedButton.styleFrom(
 
-            backgroundColor:kFirstColor,
+        actions: [
 
-            shape: RoundedRectangleBorder(
-              borderRadius:
-              BorderRadius.circular(15),
+          ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              backgroundColor: kFirstColor,
+
+              shape: RoundedRectangleBorder(
+
+                borderRadius: BorderRadius.circular(15),
+
+              ),
+
+            ),
+
+
+            onPressed: () {
+
+              print("POST BUTTON CLICKED");
+
+              uploadPost();
+
+            },
+
+            child: Text(
+
+              "Post",
+
+              style: TextStyle(
+
+                fontSize: 18,
+
+                color: k4Color,
+
+              ),
 
             ),
 
           ),
 
-          onPressed: uploadPost,
+        ],
 
-          child: Text(
 
-            'Post',
+        leading: IconButton(
 
-            style: TextStyle(
-              fontSize: 18,
-              color: k4Color,
-            ),
+          icon: const Icon(
+
+            Icons.arrow_back,
+
+            color: Colors.white,
 
           ),
 
-        ),],
+          onPressed: () {
 
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
+            Navigator.pop(context);
+
+          },
+
         ),
 
       ),
+
+
 
       floatingActionButton: FloatingActionButton(
 
         backgroundColor: k4Color,
 
+
         onPressed: showPickerOptions,
-        child: Icon(
+
+
+        child: const Icon(
+
           Icons.add,
+
           color: Colors.white,
+
         ),
 
       ),
 
+
+
+
       body: Padding(
 
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
+
 
         child: Column(
 
           children: [
 
 
-
             Container(
 
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
+
 
               height: 250,
+
+
               width: double.infinity,
+
 
               decoration: BoxDecoration(
 
@@ -297,136 +416,115 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 borderRadius: BorderRadius.circular(15),
 
                 border: Border.all(
+
                   color: Colors.grey.shade400,
+
                 ),
 
               ),
 
-              child: Column(
-
-                children: [
-
-                  Expanded(
-
-                    child: TextField(
-
-                      controller: postController,
-
-                      maxLines: null,
-
-                      expands: true,
-
-                      decoration: const InputDecoration(
-                        filled: true,
-
-                        hintText: 'Share your thoughts...',
-                        hintStyle: TextStyle(color:Colors.grey,fontSize: 16),
-                        fillColor: Colors.black12,
 
 
-                        border: InputBorder.none,
+              child: TextField(
 
-                      ),
 
-                    ),
+                controller: postController,
 
-                  ),
 
-                  Align(
+                maxLines: null,
 
-                    alignment: Alignment.bottomRight,
 
-                    child: Text(
-                      '${postController.text.length}/500',
-                    ),
+                expands: true,
 
-                  ),
 
-                ],
+                decoration: const InputDecoration(
+
+                  hintText: "Share your thoughts...",
+
+
+                  border: InputBorder.none,
+
+
+                ),
+
 
               ),
 
+
             ),
 
-            SizedBox(height: 20),
+
+
+            const SizedBox(height: 20),
 
 
 
-            if (selectedFile != null)
+
+            if(selectedFile != null)
+
 
               Container(
 
                 height: 200,
+
+
                 width: double.infinity,
+
 
                 decoration: BoxDecoration(
 
                   borderRadius: BorderRadius.circular(15),
 
-                  border: Border.all(),
-
                 ),
 
-                child: postType == 'image'
+
+
+                child: postType == "image"
+
 
                     ? ClipRRect(
 
                   borderRadius:
                   BorderRadius.circular(15),
 
+
                   child: Image.file(
 
                     selectedFile!,
+
                     fit: BoxFit.cover,
 
                   ),
 
                 )
 
-                    : Column(
+                    : Center(
 
-                  mainAxisAlignment:
-                  MainAxisAlignment.center,
+                  child: Text(
 
-                  children: [
+                    selectedFile!.path
+                        .split("/")
+                        .last,
 
-                    Icon(
-
-                      postType == 'video'
-                          ? Icons.video_library
-                          : Icons.insert_drive_file,
-
-                      size: 80,
-
-                    ),
-
-                    SizedBox(height: 10),
-
-                    Text(
-                      selectedFile!.path
-                          .split('/')
-                          .last,
-                    ),
-
-                  ],
+                  ),
 
                 ),
 
               ),
 
-            const Spacer(),
-
-
-
 
           ],
 
+
         ),
 
+
       ),
+
 
     );
 
   }
+
 
 }
