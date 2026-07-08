@@ -1,5 +1,8 @@
 
 import 'package:afghanlance/SkillCard.dart';
+import 'package:afghanlance/help&Support_Page.dart';
+import 'package:afghanlance/help_center/screens/help_center.dart';
+import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
@@ -9,6 +12,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/messenger/pages/chat_list_page.dart';
+import 'notification_controller.dart';
+import 'notification_screen.dart';
+
 import 'Setting_page/Screen_page/Screen_page.dart';
 import 'help_center/screens/help_center.dart';
 
@@ -22,15 +28,95 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomePage> {
+  Future<void> logout() async {
+    final bool? confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          title: const Text("Log Out"),
+          content: const Text(
+            "Are you sure you want to log out?",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+
+              onPressed: () {
+
+                NotificationController.addNotification(
+                  "New Project",
+                  "A new project has been added",
+                );
+
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePostScreen(),
+                  ),
+                );
+
+              },
+
+              child: const Text(
+                "Log Out",
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirm == true) {
+      await FirebaseAuth.instance.signOut();
+    }
+  }
   late bool isClient;
 
   int selectedIndex = 0;
+  int notificationUpdate = 0;
 
   String fullName = "User";
   String email = "";
   bool isLoadingUser = true;
 
   String profileImage = "assets/images/profile.png";
+
+  Stream<QuerySnapshot> unreadNotifications() {
+    Stream<QuerySnapshot> unreadNotifications() {
+
+      final user = FirebaseAuth.instance.currentUser;
+
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(user!.uid)
+          .collection('notifications')
+          .where('read', isEqualTo: false)
+          .snapshots();
+
+    }
+    final user = FirebaseAuth.instance.currentUser;
+
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .collection('notifications')
+        .where('read', isEqualTo: false)
+        .snapshots();
+
+  }
 
   @override
   void initState() {
@@ -173,7 +259,7 @@ class _HomeScreenState extends State<HomePage> {
                 style: TextStyle(color: isDark ? Colors.white : Colors.black),
               ),
 
-              onTap: () {},
+              onTap: logout,
             ),
           ],
         ),
@@ -200,13 +286,62 @@ class _HomeScreenState extends State<HomePage> {
 
         actions: selectedIndex == 0
             ? [
-                IconButton(
-                  icon: Icon(
-                    Icons.notifications_none,
-                    color: isDark ? Colors.white : Colors.black87,
-                  ),
-                  onPressed: () {},
+          IconButton(
+            icon: StreamBuilder<QuerySnapshot>(
+              stream: unreadNotifications(),
+              builder: (context, snapshot) {
+
+                int count = 0;
+
+                if (snapshot.hasData) {
+                  count = snapshot.data!.docs.length;
+                }
+
+                return Stack(
+                  children: [
+
+                    Icon(
+                      Icons.notifications_none,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+
+                    if (count > 0)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+
+                          child: Text(
+                            count.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+
+            onPressed: () {
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
                 ),
+              );
+
+            },
+          ),
                 Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: ElevatedButton(
@@ -216,12 +351,14 @@ class _HomeScreenState extends State<HomePage> {
                       padding: const EdgeInsets.all(12),
                     ),
                     onPressed: () {
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => CreatePostScreen(),
                         ),
                       );
+
                     },
                     child: const Icon(Icons.add, color: Colors.white),
                   ),
@@ -229,16 +366,12 @@ class _HomeScreenState extends State<HomePage> {
               ]
             : [],
       ),
-      body: selectedIndex == 1
-          ? const ProjectsPage()
-          : selectedIndex == 2
-          ? ChatListPage()
-          : selectedIndex == 3
-          ? ProfilePage(isClient: isClient)
-          : isClient
-          ? ClientView(isClient: isClient)
-          : FreelancerView(isClient: isClient),
-
+      body: const Center(
+        child: Text(
+          "HOME WORKING",
+          style: TextStyle(fontSize: 30),
+        ),
+      ),
       bottomNavigationBar: Container(
         height: 85,
 
