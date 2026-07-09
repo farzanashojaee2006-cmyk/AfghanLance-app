@@ -1,8 +1,6 @@
 
 import 'package:afghanlance/SkillCard.dart';
-import 'package:afghanlance/help&Support_Page.dart';
 import 'package:afghanlance/help_center/screens/help_center.dart';
-import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
@@ -40,6 +38,76 @@ class _HomeScreenState extends State<HomePage> {
     super.initState();
     isClient = widget.isClient;
     loadUserData();
+  }
+  Widget animatedItem({
+    required int index,
+    required Widget child,
+  }) {
+    return TweenAnimationBuilder<double>(
+      duration: Duration(milliseconds: 350 + (index * 120)),
+      tween: Tween(begin: 20, end: 0),
+      curve: Curves.easeOut,
+      builder: (context, value, widget) {
+        return Transform.translate(
+          offset: Offset(value, 0),
+          child: Opacity(
+            opacity: 1 - (value / 20),
+            child: widget,
+          ),
+        );
+      },
+      child: child,
+    );
+  }
+
+  Widget drawerItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+    bool danger = false,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          hoverColor: kThirdColor.withOpacity(.05),
+          splashColor: kThirdColor.withOpacity(.15),
+          highlightColor: kThirdColor.withOpacity(.08),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 19,
+                  backgroundColor: danger
+                      ? Colors.red.withOpacity(.10)
+                      : kThirdColor.withOpacity(.10),
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: danger ? Colors.red : kThirdColor,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   ImageProvider getProfileImage() {
@@ -79,21 +147,103 @@ class _HomeScreenState extends State<HomePage> {
 
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: isDark ? Color(0xFF1E1E1E) : Colors.white,
-
-        child: ListView(
-          padding: EdgeInsets.zero,
-
+        backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: isDark ? Colors.black87 : kThirdColor,
+            TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 700),
+              tween: Tween(begin: -40, end: 0),
+              curve: Curves.easeOut,
+              builder: (context, value, child) {
+                return Transform.translate(
+                  offset: Offset(0, value),
+                  child: Opacity(
+                    opacity: 1 - (value.abs() / 40),
+                    child: child,
+                  ),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 45, bottom: 22),
+                decoration: const BoxDecoration(
+                  color: kThirdColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(38),
+                    bottomRight: Radius.circular(38),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 8,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        radius: 36,
+                        backgroundImage: getProfileImage(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      fullName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: .4,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        isClient ? "Client" : "Freelancer",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      email,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              accountName: Text(fullName),
-              accountEmail: Text(email),
+            ),
 
-              currentAccountPicture: GestureDetector(
+            const SizedBox(height: 18),
+
+            animatedItem(
+              index: 0,
+              child: drawerItem(
+                icon: Icons.person_outline,
+                title: "Profile",
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -101,82 +251,73 @@ class _HomeScreenState extends State<HomePage> {
                     ),
                   );
                 },
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: getProfileImage(),
-                ),
               ),
             ),
 
-            ListTile(
-              leading: Icon(Icons.person_outline, color: kThirdColor),
-
-              title: Text(
-                "Profile",
-
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ProfilePage(isClient: isClient),
-                  ),
-                );
-              },
-            ),
-
-            ListTile(
-              leading: Icon(Icons.settings_outlined, color: kThirdColor),
-
-              title: GestureDetector(
+            animatedItem(
+              index: 1,
+              child: drawerItem(
+                icon: Icons.settings_outlined,
+                title: "Settings",
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                    MaterialPageRoute(
+                      builder: (_) => SettingsPage(),
+                    ),
                   );
                 },
-                child: Text(
-                  "Settings",
-
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                ),
               ),
-
-              onTap: () {},
             ),
 
-            ListTile(
-              leading: Icon(Icons.help_outline, color: kThirdColor),
-
-              title: GestureDetector(
+            animatedItem(
+              index: 2,
+              child: drawerItem(
+                icon: Icons.help_outline,
+                title: "Help & Support",
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HelpCenterScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => HelpCenterScreen(),
+                    ),
                   );
                 },
-                child: Text(
-                  "Help & Support",
-
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                ),
               ),
-
-              onTap: () {},
             ),
 
-            ListTile(
-              leading: Icon(Icons.logout, color: Colors.red),
-
-              title: Text(
-                "Log out",
-
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+              child: Divider(
+                thickness: .7,
+                color: isDark ? Colors.white24 : Colors.grey.shade300,
               ),
+            ),
 
-              onTap: () {},
+            animatedItem(
+              index: 3,
+              child: drawerItem(
+                icon: Icons.logout,
+                title: "Log out",
+                danger: true,
+                onTap: () {},
+              ),
+            ),
+
+            const Spacer(),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 18),
+              child: Text(
+                "AfghanLance",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : Colors.black87,
+                ),
+              ),
             ),
           ],
         ),
