@@ -84,7 +84,7 @@ class _ContactSupportScreenState
                 },
               ),
 
-              const SizedBox(height: 24),
+               SizedBox(height: 24),
 
               SizedBox(
                 width: double.infinity,
