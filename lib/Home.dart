@@ -211,12 +211,12 @@ class _HomeScreenState extends State<HomePage> {
                   onPressed: () {},
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 12),
+                  padding:  EdgeInsets.only(right: 12),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kThirdColor,
                       shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(12),
+                      padding:  EdgeInsets.all(12),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomePage> {
                         ),
                       );
                     },
-                    child: const Icon(Icons.add, color: Colors.white),
+                    child:  Icon(Icons.add, color: Colors.white),
                   ),
                 ),
               ]

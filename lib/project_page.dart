@@ -78,7 +78,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ),
             ),
 
-            const SizedBox(height: 20),
+             SizedBox(height: 20),
 
             // Filter Chips
             SizedBox(
@@ -121,7 +121,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ),
             ),
 
-            const SizedBox(height: 20),
+             SizedBox(height: 20),
 
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
