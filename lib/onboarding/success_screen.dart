@@ -20,19 +20,19 @@ class _SuccessScreenState extends State<SuccessScreen> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(
       Duration(seconds: 2),
           () {
         if (!mounted) return;
 
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (_) => HomePage(
               isClient: widget.isClient,
             ),
           ),
+              (route) => false,
         );
       },
     );

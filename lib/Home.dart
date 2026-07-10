@@ -1,7 +1,5 @@
 import 'package:afghanlance/SkillCard.dart';
-import 'package:afghanlance/help&Support_Page.dart';
 import 'package:afghanlance/help_center/screens/help_center.dart';
-import 'package:afghanlance/helpePage.dart';
 import 'package:afghanlance/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
 import 'package:afghanlance/projectCards.dart';
