@@ -12,8 +12,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/messenger/pages/chat_list_page.dart';
-
 import 'Setting_page/Screen_page/Screen_page.dart';
+import 'auth/logout_page.dart';
+import 'package:afghanlance/notification_page.dart';
+
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -109,24 +111,26 @@ class _HomeScreenState extends State<HomePage> {
             ),
 
             ListTile(
-              leading: Icon(Icons.person_outline, color: kThirdColor),
+              leading: Icon(Icons.notifications_none, color: kThirdColor),
 
               title: Text(
-                "Profile",
-
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                "Notifications",
+                style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                ),
               ),
 
               onTap: () {
+                Navigator.pop(context);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => ProfilePage(isClient: isClient),
+                    builder: (_) => const NotificationPage(),
                   ),
                 );
               },
             ),
-
             ListTile(
               leading: Icon(Icons.settings_outlined, color: kThirdColor),
 
@@ -168,15 +172,21 @@ class _HomeScreenState extends State<HomePage> {
             ),
 
             ListTile(
-              leading: Icon(Icons.logout, color: Colors.red),
+              leading: const Icon(
+                Icons.logout,
+                color: Colors.red,
+              ),
 
               title: Text(
                 "Log out",
-
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                ),
               ),
 
-              onTap: () {},
+              onTap: () {
+                LogoutPage.showLogoutDialog(context);
+              },
             ),
           ],
         ),
@@ -203,33 +213,88 @@ class _HomeScreenState extends State<HomePage> {
 
         actions: selectedIndex == 0
             ? [
-                IconButton(
-                  icon: Icon(
-                    Icons.notifications_none,
-                    color: isDark ? Colors.white : Colors.black87,
-                  ),
-                  onPressed: () {},
-                ),
-                Padding(
-                  padding:  EdgeInsets.only(right: 12),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: kThirdColor,
-                      shape: const CircleBorder(),
-                      padding:  EdgeInsets.all(12),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('notifications')
+                .where(
+              'userId',
+              isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+            )
+                .where(
+              'isRead',
+              isEqualTo: false,
+            )
+                .snapshots(),
+            builder: (context, snapshot) {
+              int unreadCount = snapshot.data?.docs.length ?? 0;
+
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.notifications_none,
+                      color: isDark ? Colors.white : Colors.black87,
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreatePostScreen(),
+                          builder: (_) => const NotificationPage(),
                         ),
                       );
                     },
-                    child:  Icon(Icons.add, color: Colors.white),
                   ),
-                ),
-              ]
+
+                  if (unreadCount > 0)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(
+                          minWidth: 18,
+                          minHeight: 18,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          unreadCount.toString(),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+          Padding(
+            padding:  EdgeInsets.only(right: 12),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kThirdColor,
+                shape: const CircleBorder(),
+                padding:  EdgeInsets.all(12),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePostScreen(),
+                  ),
+                );
+              },
+              child:  Icon(Icons.add, color: Colors.white),
+            ),
+          ),
+        ]
             : [],
       ),
       body: selectedIndex == 1
@@ -420,7 +485,7 @@ class ClientView extends StatelessWidget {
       title: 'Find Your Perfect Freelancer',
 
       subtitle:
-          'Thousands of talented Afghan freelancer ready for your project.',
+      'Thousands of talented Afghan freelancer ready for your project.',
     );
   }
 }

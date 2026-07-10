@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:afghanlance/messenger/services/notification_service.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -23,6 +25,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   String postType = '';
 
   final ImagePicker picker = ImagePicker();
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 
 
@@ -171,30 +174,60 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 
 
-  void uploadPost() {
+  Future<void> uploadPost() async {
 
-    if (postController.text.trim().isEmpty &&
-        selectedFile == null) {
-
+    if (postController.text.trim().isEmpty && selectedFile == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         const SnackBar(
-          content: Text('Write something or pick a file'),
+          content: Text("Write something or pick a file"),
         ),
+      );
+      return;
+    }
+
+    try {
+
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) return;
+
+
+      final userDoc = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.uid)
+          .get();
+
+      final userData = userDoc.data();
+
+
+
+      await NotificationService().createNotification(
+
+        userId: user.uid,
+
+        title: "Post Created",
+
+        message: "Your post has been published successfully.",
 
       );
 
-      return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Post Uploaded Successfully"),
+        ),
+      );
+
+      Navigator.pop(context);
+
+    } catch (e) {
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
 
     }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-
-      const SnackBar(
-        content: Text('Post Uploaded Successfully'),
-      ),
-
-    );
 
   }
 
@@ -239,8 +272,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
           ),
 
-          onPressed: uploadPost,
-
+          onPressed: () async {
+            await uploadPost();
+          },
           child: Text(
 
             'Post',
