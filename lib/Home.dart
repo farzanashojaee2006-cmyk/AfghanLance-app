@@ -1,4 +1,3 @@
-
 import 'package:afghanlance/SkillCard.dart';
 import 'package:afghanlance/help&Support_Page.dart';
 import 'package:afghanlance/help_center/screens/help_center.dart';
@@ -15,7 +14,6 @@ import 'package:afghanlance/messenger/pages/chat_list_page.dart';
 import 'Setting_page/Screen_page/Screen_page.dart';
 import 'auth/logout_page.dart';
 import 'package:afghanlance/notification_page.dart';
-
 
 class HomePage extends StatefulWidget {
   final bool isClient;
@@ -42,6 +40,71 @@ class _HomeScreenState extends State<HomePage> {
     super.initState();
     isClient = widget.isClient;
     loadUserData();
+  }
+
+  Widget animatedItem({required int index, required Widget child}) {
+    return TweenAnimationBuilder<double>(
+      duration: Duration(milliseconds: 350 + (index * 120)),
+      tween: Tween(begin: 20, end: 0),
+      curve: Curves.easeOut,
+      builder: (context, value, widget) {
+        return Transform.translate(
+          offset: Offset(value, 0),
+          child: Opacity(opacity: 1 - (value / 20), child: widget),
+        );
+      },
+      child: child,
+    );
+  }
+
+  Widget drawerItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+    bool danger = false,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          hoverColor: kThirdColor.withOpacity(.05),
+          splashColor: kThirdColor.withOpacity(.15),
+          highlightColor: kThirdColor.withOpacity(.08),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 19,
+                  backgroundColor: danger
+                      ? Colors.red.withOpacity(.10)
+                      : kThirdColor.withOpacity(.10),
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: danger ? Colors.red : kThirdColor,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   ImageProvider getProfileImage() {
@@ -81,21 +144,59 @@ class _HomeScreenState extends State<HomePage> {
 
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: isDark ? Color(0xFF1E1E1E) : Colors.white,
-
-        child: ListView(
-          padding: EdgeInsets.zero,
-
+        backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: isDark ? Colors.black87 : kThirdColor,
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(top: 45, bottom: 22),
+              decoration: const BoxDecoration(
+                color: kThirdColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(38),
+                  bottomRight: Radius.circular(38),
+                ),
               ),
-              accountName: Text(fullName),
-              accountEmail: Text(email),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: CircleAvatar(
+                      radius: 36,
+                      backgroundImage: getProfileImage(),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    fullName,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    email,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
 
-              currentAccountPicture: GestureDetector(
+            const SizedBox(height: 18),
+            animatedItem(
+              index: 0,
+              child: drawerItem(
+                icon: Icons.person_outline,
+                title: "Profile",
                 onTap: () {
+                  Navigator.pop(context);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -103,95 +204,73 @@ class _HomeScreenState extends State<HomePage> {
                     ),
                   );
                 },
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: getProfileImage(),
-                ),
               ),
             ),
 
-            ListTile(
-              leading: Icon(Icons.notifications_none, color: kThirdColor),
 
-              title: Text(
-                "Notifications",
-                style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-              ),
-
-              onTap: () {
-                Navigator.pop(context);
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const NotificationPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings_outlined, color: kThirdColor),
-
-              title: GestureDetector(
+            animatedItem(
+              index: 1,
+              child: drawerItem(
+                icon: Icons.notifications_none,
+                title: "Notifications",
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                    MaterialPageRoute(builder: (_) => const NotificationPage()),
                   );
                 },
-                child: Text(
-                  "Settings",
-
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                ),
               ),
-
-              onTap: () {},
             ),
 
-            ListTile(
-              leading: Icon(Icons.help_outline, color: kThirdColor),
-
-              title: GestureDetector(
+            animatedItem(
+              index: 2,
+              child: drawerItem(
+                icon: Icons.settings_outlined,
+                title: "Settings",
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HelpCenterScreen()),
+                    MaterialPageRoute(builder: (_) => SettingsPage()),
                   );
                 },
-                child: Text(
-                  "Help & Support",
-
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                ),
               ),
-
-              onTap: () {},
             ),
 
-            ListTile(
-              leading: const Icon(
-                Icons.logout,
-                color: Colors.red,
+            animatedItem(
+              index: 3,
+              child: drawerItem(
+                icon: Icons.help_outline,
+                title: "Help & Support",
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => HelpCenterScreen()),
+                  );
+                },
               ),
-
-              title: Text(
-                "Log out",
-                style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-              ),
-
-              onTap: () {
-                LogoutPage.showLogoutDialog(context);
-              },
             ),
+
+            const Spacer(),
+
+            animatedItem(
+              index: 4,
+              child: drawerItem(
+                icon: Icons.logout,
+                title: "Log out",
+                danger: true,
+                onTap: () {
+                  LogoutPage.showLogoutDialog(context);
+                },
+              ),
+            ),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),
-
       backgroundColor: isDark ? Color(0xFF121212) : kFirstColor,
 
       appBar: AppBar(
@@ -213,88 +292,85 @@ class _HomeScreenState extends State<HomePage> {
 
         actions: selectedIndex == 0
             ? [
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('notifications')
-                .where(
-              'userId',
-              isEqualTo: FirebaseAuth.instance.currentUser!.uid,
-            )
-                .where(
-              'isRead',
-              isEqualTo: false,
-            )
-                .snapshots(),
-            builder: (context, snapshot) {
-              int unreadCount = snapshot.data?.docs.length ?? 0;
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('notifications')
+                      .where(
+                        'userId',
+                        isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                      )
+                      .where('isRead', isEqualTo: false)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    int unreadCount = snapshot.data?.docs.length ?? 0;
 
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.notifications_none,
-                      color: isDark ? Colors.white : Colors.black87,
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.notifications_none,
+                            color: isDark ? Colors.white : Colors.black87,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const NotificationPage(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        if (unreadCount > 0)
+                          Positioned(
+                            right: 8,
+                            top: 8,
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              constraints: const BoxConstraints(
+                                minWidth: 18,
+                                minHeight: 18,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                unreadCount.toString(),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 12),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kThirdColor,
+                      shape: const CircleBorder(),
+                      padding: EdgeInsets.all(12),
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const NotificationPage(),
+                          builder: (context) => CreatePostScreen(),
                         ),
                       );
                     },
+                    child: Icon(Icons.add, color: Colors.white),
                   ),
-
-                  if (unreadCount > 0)
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints(
-                          minWidth: 18,
-                          minHeight: 18,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          unreadCount.toString(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            },
-          ),
-          Padding(
-            padding:  EdgeInsets.only(right: 12),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kThirdColor,
-                shape: const CircleBorder(),
-                padding:  EdgeInsets.all(12),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatePostScreen(),
-                  ),
-                );
-              },
-              child:  Icon(Icons.add, color: Colors.white),
-            ),
-          ),
-        ]
+                ),
+              ]
             : [],
       ),
       body: selectedIndex == 1
@@ -485,7 +561,7 @@ class ClientView extends StatelessWidget {
       title: 'Find Your Perfect Freelancer',
 
       subtitle:
-      'Thousands of talented Afghan freelancer ready for your project.',
+          'Thousands of talented Afghan freelancer ready for your project.',
     );
   }
 }
