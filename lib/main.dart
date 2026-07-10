@@ -54,7 +54,6 @@ class _AfghanLanceState extends State<AfghanLance> {
       ),
 
      home: AuthGate(onToggleTheme: toggleTheme),
-      //home: WelcomePageOne(onToggleTheme: toggleTheme),
     );
   }
 }
