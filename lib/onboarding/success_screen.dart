@@ -20,7 +20,6 @@ class _SuccessScreenState extends State<SuccessScreen> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(
       Duration(seconds: 2),
           () {
