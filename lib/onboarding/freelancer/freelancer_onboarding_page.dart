@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../Home.dart';
+import '../../main_screens/Home.dart';
 import '../success_screen.dart';
 import '../widgets/onboarding_background.dart';
 import '../widgets/onboarding_header.dart';
@@ -14,6 +14,7 @@ import '../widgets/selection_list.dart';
 import '../widgets/skill_selector.dart';
 
 class FreelancerOnboardingPage extends StatefulWidget {
+  static const String id="/FreelancerOnboardingPage";
   const FreelancerOnboardingPage({super.key});
 
   @override

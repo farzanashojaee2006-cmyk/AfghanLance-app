@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Home.dart';
+import '../main_screens/Home.dart';
 import '../constants.dart';
 import 'widgets/onboarding_background.dart';
 

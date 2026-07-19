@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class ProjectsPage extends StatefulWidget {
+  static const String id = "/ProjectsPage";
   const ProjectsPage({super.key});
 
   @override

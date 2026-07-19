@@ -3,12 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
-import 'package:afghanlance/Home.dart';
-import 'package:afghanlance/signup_page.dart';
+import 'package:afghanlance/main_screens/Home.dart';
+import 'package:afghanlance/main_screens/signup_page.dart';
 
-import 'forgot_password_screen.dart';
+import '../sub_screen/forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String id="/LoginScreen";
   const LoginScreen({super.key});
 
   @override

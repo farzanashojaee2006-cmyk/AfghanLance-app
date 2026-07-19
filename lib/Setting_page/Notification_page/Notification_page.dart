@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget{
+  static const String id="/NotificationScreen";
   const NotificationScreen ({super.key});
 
   @override

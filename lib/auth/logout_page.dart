@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../welcome_page.dart';
+import '../main_screens/welcome_page.dart';
 
 class LogoutPage {
   static Future<void> showLogoutDialog(BuildContext context) async {

@@ -1,22 +1,24 @@
-import 'package:afghanlance/SkillCard.dart';
-import 'package:afghanlance/help_center/screens/help_center.dart';
-import 'package:afghanlance/post_page.dart';
+import 'package:afghanlance/widgets/SkillCard.dart';
+
+import 'package:afghanlance/sub_screen/post_page.dart';
 import 'package:afghanlance/profile/profile_page.dart';
-import 'package:afghanlance/projectCards.dart';
-import 'package:afghanlance/project_page.dart';
+import 'package:afghanlance/widgets/projectCards.dart';
+import 'package:afghanlance/sub_screen/project_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:afghanlance/constants.dart';
 import 'package:afghanlance/messenger/pages/chat_list_page.dart';
-import 'Setting_page/Screen_page/Screen_page.dart';
-import 'auth/logout_page.dart';
-import 'package:afghanlance/notification_page.dart';
+import '../Setting_page/setting_page.dart';
+import '../Setting_page/help_center/screens/help_center.dart';
+import '../auth/logout_page.dart';
+import 'package:afghanlance/main_screens/notification_page.dart';
 
 class HomePage extends StatefulWidget {
-  final bool isClient;
+  static const String id="/HomePage";
+  final bool? isClient;
 
-  const HomePage({super.key, required this.isClient});
+  const HomePage({super.key,this.isClient});
 
   @override
   State<HomePage> createState() => _HomeScreenState();
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    isClient = widget.isClient;
+    isClient = widget.isClient!;
     loadUserData();
   }
 

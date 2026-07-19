@@ -2,18 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../Account_page/Account.dart';
-import '../Appearance_page/Appearance.dart';
-import '../JobPrefernce_page/Job_Perferences.dart';
-import '../MyResume/MyResume.dart';
-import '../Notification_page/Notification_page.dart';
-import '../Praivacy_page/Praivacy.dart';
-import '../SavedJobs/Saved job _page.dart';
-import '../Storage_and_Data/Storage_&_Data.dart';
+import 'Account_page/Account.dart';
+import 'Appearance_page/Appearance.dart';
+import 'JobPrefernce_page/Job_Perferences.dart';
+import 'MyResume/MyResume.dart';
+import 'Notification_page/Notification_page.dart';
+import 'Praivacy_page/Praivacy.dart';
+import 'SavedJobs/Saved job _page.dart';
+import 'Storage_and_Data/Storage_&_Data.dart';
 
 
 
 class SettingsPage extends StatelessWidget{
+  static const String id="/SettingsPage";
   const SettingsPage ({super.key});
 
   @override

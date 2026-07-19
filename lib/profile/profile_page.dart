@@ -8,13 +8,14 @@ import 'freelancer/freelancer_profile_view.dart';
 import 'services/profile_service.dart';
 
 class ProfilePage extends StatelessWidget {
-  final bool isClient;
+  static const String id="/ProfilePage";
+  final bool? isClient;
   final bool showBottomNav;
   final String? userId;
 
   const ProfilePage({
     super.key,
-    required this.isClient,
+     this.isClient,
     this.showBottomNav = false,
     this.userId,
   });

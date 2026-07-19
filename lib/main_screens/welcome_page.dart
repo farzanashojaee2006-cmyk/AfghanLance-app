@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui';
 import 'Chosing_page.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class WelcomePageOne extends StatefulWidget {
-  final VoidCallback onToggleTheme;
-  const WelcomePageOne({super.key, required this.onToggleTheme});
+  static const String id = "/welcome";
+  final VoidCallback? onToggleTheme;
+  const WelcomePageOne({super.key, this.onToggleTheme});
 
   @override
   State<WelcomePageOne> createState() => _WelcomePageState();
@@ -56,7 +57,7 @@ class _WelcomePageState extends State<WelcomePageOne> with TickerProviderStateMi
           context,
           MaterialPageRoute(
             builder: (_) => WelcomePageTwo(
-              onToggleTheme: widget.onToggleTheme,
+              onToggleTheme: widget.onToggleTheme!,
             ),
           ),
         );

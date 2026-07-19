@@ -1,19 +1,20 @@
 import 'package:afghanlance/constants.dart';
-import 'package:afghanlance/login_page.dart';
+import 'package:afghanlance/main_screens/login_page.dart';
 import 'package:afghanlance/services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'onboarding/client/client_onboarding_page.dart';
-import 'onboarding/freelancer/freelancer_onboarding_page.dart';
+import '../onboarding/client/client_onboarding_page.dart';
+import '../onboarding/freelancer/freelancer_onboarding_page.dart';
 
 enum SignupMethod { email, phone }
 
 class SignUpScreen extends StatefulWidget {
-  final bool isClient;
+  static const String id = "/SignUpScreen";
+  final bool? isClient;
 
-  const SignUpScreen({super.key, required this.isClient});
+  const SignUpScreen({super.key, this.isClient});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -401,7 +402,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               'email': emailController.text.trim(),
                               'username': username,
                               'country': countryController.text.trim(),
-                              'role': widget.isClient ? 'client' : 'freelancer',
+                              'role': widget.isClient! ? 'client' : 'freelancer',
                               'profileImage': 'assets/images/profile.png',
                               'isVerified': false,
                               'isProfileCompleted': false,
@@ -413,7 +414,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => widget.isClient
+                            builder: (_) => widget.isClient!
                                 ? ClientOnboardingPage()
                                 : FreelancerOnboardingPage(),
                           ),
@@ -525,7 +526,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               'email': user.email ?? '',
                               'username': username,
                               'country': '',
-                              'role': widget.isClient ? 'client' : 'freelancer',
+                              'role': widget.isClient! ? 'client' : 'freelancer',
                               'profileImage': user.photoURL ?? '',
                               'isVerified': false,
                               'isProfileCompleted': false,
@@ -542,7 +543,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => widget.isClient
+                              builder: (_) => widget.isClient!
                                   ? ClientOnboardingPage()
                                   : FreelancerOnboardingPage(),
                             ),

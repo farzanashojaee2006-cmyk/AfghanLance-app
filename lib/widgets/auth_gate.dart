@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'Home.dart';
-import 'welcome_page.dart';
+import '../main_screens/Home.dart';
+import '../main_screens/welcome_page.dart';
 
 class AuthGate extends StatelessWidget {
+
+  static const String id = "/AuthGate";
   final VoidCallback onToggleTheme;
 
   const AuthGate({

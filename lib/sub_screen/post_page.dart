@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:afghanlance/messenger/services/notification_service.dart';
 
 class CreatePostScreen extends StatefulWidget {
+  static const String id="/CreatePostScreen";
   const CreatePostScreen({super.key});
 
   @override

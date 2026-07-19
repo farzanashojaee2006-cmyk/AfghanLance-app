@@ -1,12 +1,13 @@
-import 'package:afghanlance/Home.dart';
+
 import 'package:flutter/material.dart';
-import 'package:afghanlance/signup_page.dart';
+import 'package:afghanlance/main_screens/signup_page.dart';
 
 import 'login_page.dart';
 
 
 
 class WelcomePageTwo extends StatefulWidget {
+  static const String id="/WelcomePageTwo";
   final VoidCallback onToggleTheme;
   const WelcomePageTwo({super.key, required this.onToggleTheme});
 
