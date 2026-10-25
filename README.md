@@ -2,8 +2,11 @@
 
 AfghanLance is a Flutter-based freelancing platform designed to connect Afghan clients and freelancers through a user-friendly mobile application. The platform aims to create opportunities for professionals to showcase their skills, find projects, and collaborate efficiently.
 
-## Features
+![Team Poster](https://github.com/farzanashojaee2006-cmyk/AfghanLance-app/blob/66c0503d1fac29e69bbae4d2c09d116d2ff6675d/20.jpg)
+![Team Poster](https://github.com/farzanashojaee2006-cmyk/AfghanLance-app/blob/66c0503d1fac29e69bbae4d2c09d116d2ff6675d/30.jpg)
+![Team Poster](https://github.com/farzanashojaee2006-cmyk/AfghanLance-app/blob/66c0503d1fac29e69bbae4d2c09d116d2ff6675d/40.jpg)
 
+## Features
 - User Registration and Authentication
 - Freelancer and Client Profiles
 - Project Posting and Browsing
@@ -82,5 +85,4 @@ flutter run
 
 
 ## License
-
 This project was developed for educational and academic purposes.
